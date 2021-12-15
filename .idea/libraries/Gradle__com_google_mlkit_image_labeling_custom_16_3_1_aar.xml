@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.mlkit:image-labeling-custom:16.3.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/85091f90e7cbaaaaba621ea6516b86d5/jetified-image-labeling-custom-16.3.1/res" />
+      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/e2624c685e27af373f526440bf4d57c1/jetified-image-labeling-custom-16.3.1/res" />
+      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/e2624c685e27af373f526440bf4d57c1/jetified-image-labeling-custom-16.3.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/e2624c685e27af373f526440bf4d57c1/jetified-image-labeling-custom-16.3.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/modules-2/files-2.1/com.google.mlkit/image-labeling-custom/16.3.1/af12341446d749b80f43b6e47be8a61f3931b2f3/image-labeling-custom-16.3.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
