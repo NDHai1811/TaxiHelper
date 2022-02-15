@@ -9,16 +9,18 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="257dp"
-        android:layout_height="66dp"
+        android:layout_width="307dp"
+        android:layout_height="61dp"
         android:layout_marginTop="60dp"
         android:text="Không có thông báo"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.613"
         tools:ignore="MissingConstraints" />
 
     <ImageView
