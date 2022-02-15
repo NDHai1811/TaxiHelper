@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    xmlns:tools2="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools2:context=".ui.common.splash_screen"
+    android:background="@drawable/splash"
+    >
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/splash"
+        tools:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/powered"
+        android:layout_width="73dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginLeft="168dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginRight="170dp"
+        android:text="@string/powered"
+        tools2:ignore="MissingConstraints"
+        tools2:layout_editor_absoluteY="680dp"
+        tools:layout_constraintEnd_toEndOf="@+id/background_image"
+        tools:layout_constraintStart_toStartOf="@+id/background_image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

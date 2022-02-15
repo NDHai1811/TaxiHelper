@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BottomNavigation</string>
+    <string name="title_shop">Trang chủ</string>
+    <string name="title_gifts">Thông báo</string>
+    <string name="title_cart">Cài đặt</string>
+    <string name="title_profile">Cá nhân</string>
+    <string name="powered">Làm tại ors</string>
+</resources>

@@ -5,9 +5,12 @@
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/be8179faf8ad8ee6f7a943500fc4ca23/jetified-play-services-vision-face-contour-internal-16.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/be8179faf8ad8ee6f7a943500fc4ca23/jetified-play-services-vision-face-contour-internal-16.1.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/be8179faf8ad8ee6f7a943500fc4ca23/jetified-play-services-vision-face-contour-internal-16.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d69f5e5d6b050944b8bcdb174f551a6e/jetified-play-services-vision-face-contour-internal-16.1.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d69f5e5d6b050944b8bcdb174f551a6e/jetified-play-services-vision-face-contour-internal-16.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d69f5e5d6b050944b8bcdb174f551a6e/jetified-play-services-vision-face-contour-internal-16.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/modules-2/files-2.1/com.google.android.gms/play-services-vision-face-contour-internal/16.1.0/6a8b08d2a93001c8d089863beda57683994fb63d/play-services-vision-face-contour-internal-16.1.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-vision-face-contour-internal/16.1.0/6a8b08d2a93001c8d089863beda57683994fb63d/play-services-vision-face-contour-internal-16.1.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

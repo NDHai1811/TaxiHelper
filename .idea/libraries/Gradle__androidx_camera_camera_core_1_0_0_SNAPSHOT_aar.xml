@@ -2,15 +2,19 @@
   <library name="Gradle: androidx.camera:camera-core:1.0.0-SNAPSHOT@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/752851d8ad62dbc1fb891b68d85e000b/jetified-camera-core-1.0.0-SNAPSHOT/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ccb6f240d0913140450d6bebe1c4d40/jetified-camera-core-1.0.0-SNAPSHOT/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/752851d8ad62dbc1fb891b68d85e000b/jetified-camera-core-1.0.0-SNAPSHOT/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/752851d8ad62dbc1fb891b68d85e000b/jetified-camera-core-1.0.0-SNAPSHOT/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/752851d8ad62dbc1fb891b68d85e000b/jetified-camera-core-1.0.0-SNAPSHOT/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ccb6f240d0913140450d6bebe1c4d40/jetified-camera-core-1.0.0-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ccb6f240d0913140450d6bebe1c4d40/jetified-camera-core-1.0.0-SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ccb6f240d0913140450d6bebe1c4d40/jetified-camera-core-1.0.0-SNAPSHOT/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/modules-2/files-2.1/androidx.camera/camera-core/1.0.0-SNAPSHOT/c463e5cc6b794fb9c583b932aa62eb3c2417ecbb/camera-core-1.0.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.camera/camera-core/1.0.0-SNAPSHOT/c463e5cc6b794fb9c583b932aa62eb3c2417ecbb/camera-core-1.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

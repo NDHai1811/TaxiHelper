@@ -75,5 +75,12 @@
     <string name="pref_key_live_preview_face_detection_min_face_size" translatable="false">lpfdmfs</string>
     <string name="pref_dialog_message_face_detector_min_face_size">Proportion of the head width to the image width, and the valid value range is [0.0, 1.0]</string>
     <string name="pref_toast_invalid_min_face_size">Minimum face size must be a float value and in the range [0.0, 1.0]</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="powered">Làm tại ors</string>
+    <string name="title_shop">Trang chủ</string>
+    <string name="title_gifts">Thông báo</string>
+    <string name="title_cart">Cài đặt</string>
+    <string name="title_profile">Cá nhân</string>
 </resources>
