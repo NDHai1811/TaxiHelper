@@ -224,7 +224,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:background="@color/white"
-        app:cardCornerRadius="25dp"
+
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.13"
@@ -235,7 +235,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/t1" />
+            android:background="@drawable/facebook" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -248,7 +248,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="100dp"
         android:background="@color/white"
-        app:cardCornerRadius="25dp"
+
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
@@ -259,7 +259,31 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/f1" />
+            android:background="@drawable/instagram" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+
+        android:layout_marginTop="100dp"
+        android:background="@color/white"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/discord" />
     </androidx.cardview.widget.CardView>
 
     <TextView
