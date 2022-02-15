@@ -218,7 +218,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="49dp"
+        android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -259,7 +259,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/instagram" />
+            android:src="@drawable/instagram" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
