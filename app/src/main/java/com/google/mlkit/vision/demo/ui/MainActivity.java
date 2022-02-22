@@ -39,17 +39,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_shop:
                         toolbar.setTitle("Trang chủ");
-                        fragment=new Fragment_Anasayfa();
+                        fragment=new Fragment_Home();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_gifts:
                         toolbar.setTitle("Thông báo");
-                        fragment=new Fragment_Gift();
+                        fragment=new Fragment_Notify();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_cart:
                         toolbar.setTitle("Cài đặt");
-                        fragment=new Fragment_Cards();
+                        fragment=new Fragment_Setting();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_profile:
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         ///////////////////////////////////////////////////////////
-        Fragment_load(new Fragment_Anasayfa());
+        Fragment_load(new Fragment_Home());
         ///////////////////////////////////////////////////////////
     }
     private void Fragment_load(Fragment fragment){

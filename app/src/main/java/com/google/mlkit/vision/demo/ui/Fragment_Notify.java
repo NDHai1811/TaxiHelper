@@ -1,9 +1,7 @@
 package com.google.mlkit.vision.demo.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.mlkit.vision.demo.R;
-import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_Anasayfa#newInstance} factory method to
+ * Use the {@link Fragment_Notify#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Anasayfa extends Fragment {
+public class Fragment_Notify extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +26,7 @@ public class Fragment_Anasayfa extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Fragment_Anasayfa() {
+    public Fragment_Notify() {
         // Required empty public constructor
     }
 
@@ -39,11 +36,11 @@ public class Fragment_Anasayfa extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment_Anasayfa.
+     * @return A new instance of fragment Fragment_Gift.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Anasayfa newInstance(String param1, String param2) {
-        Fragment_Anasayfa fragment = new Fragment_Anasayfa();
+    public static Fragment_Notify newInstance(String param1, String param2) {
+        Fragment_Notify fragment = new Fragment_Notify();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,29 +60,7 @@ public class Fragment_Anasayfa extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment__anasayfa,container,false);
-        CardView button = (CardView) view.findViewById(R.id.card1);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getActivity(), LivePreviewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        CardView button2 = (CardView) view.findViewById(R.id.cardhd);
-        button2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getActivity(), TestUi.class);
-                startActivity(intent);
-            }
-        });
         // Inflate the layout for this fragment
-        return view;
+        return inflater.inflate(R.layout.fragment_notify, container, false);
     }
 }
