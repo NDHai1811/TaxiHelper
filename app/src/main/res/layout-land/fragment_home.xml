@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foregroundGravity="top"
-    tools:context=".MainActivity">
+    tools:context=".ui.Fragment_Home">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
 
     <com.scwang.wave.MultiWaveHeader
         android:id="@+id/waveHeader"
@@ -80,7 +91,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
 
             <RelativeLayout
@@ -120,7 +133,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
             <RelativeLayout
                 android:id="@+id/hdsd"
@@ -170,7 +185,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -204,7 +221,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -235,36 +254,42 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/facebook"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="228dp"
+                android:layout_marginTop="92dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/facebook"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="92dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/instagram"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="60dp"
-        android:src="@drawable/discord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="228dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:src="@drawable/discord"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -277,5 +302,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
