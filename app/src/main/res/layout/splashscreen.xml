@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools2:context=".ui.common.splash_screen"
-    android:background="@drawable/splash"
+
     >
 
     <ImageView
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash"
+        android:src="@drawable/cutebear"
         tools:layout_constraintStart_toStartOf="parent" />
 
     <TextView
