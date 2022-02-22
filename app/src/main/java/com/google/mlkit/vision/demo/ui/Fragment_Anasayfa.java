@@ -74,6 +74,17 @@ public class Fragment_Anasayfa extends Fragment {
                 startActivity(intent);
             }
         });
+
+        CardView button2 = (CardView) view.findViewById(R.id.cardhd);
+        button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), TestUi.class);
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }

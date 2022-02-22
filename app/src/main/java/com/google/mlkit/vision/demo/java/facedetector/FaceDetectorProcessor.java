@@ -25,6 +25,7 @@ import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.java.VisionProcessorBase;
 import com.google.mlkit.vision.face.Face;
+import com.google.mlkit.vision.face.FaceContour;
 import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
@@ -39,6 +40,7 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
 
   private final FaceDetector detector;
   public double look;
+  public float left, right;
 
   public FaceDetectorProcessor(Context context) {
     this(
@@ -71,9 +73,17 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
     for (Face face : faces) {
       graphicOverlay.add(new FaceGraphic(graphicOverlay, face));
       look = face.getHeadEulerAngleY();
+      if (face.getLeftEyeOpenProbability() != null || face.getRightEyeOpenProbability() != null){
+        left = face.getLeftEyeOpenProbability();
+        right = face.getRightEyeOpenProbability();
+      }
+
+
       logExtrasForTesting(face);
     }
   }
+
+
 
   private static void logExtrasForTesting(Face face) {
     if (face != null) {
@@ -135,6 +145,35 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
           "face right eye open probability: " + face.getRightEyeOpenProbability());
       Log.v(MANUAL_TESTING_LOG, "face smiling probability: " + face.getSmilingProbability());
       Log.v(MANUAL_TESTING_LOG, "face tracking id: " + face.getTrackingId());
+
+
+      int[] conTourTypes =
+        new int[] {
+                FaceContour.LOWER_LIP_BOTTOM,
+                FaceContour.LOWER_LIP_TOP,
+                FaceContour.UPPER_LIP_BOTTOM,
+                FaceContour.UPPER_LIP_TOP
+        };
+      String[] conTourTypesStrings =
+        new String[] {
+          "LOWER_LIP_BOTTOM",
+          "LOWER_LIP_TOP",
+          "UPPER_LIP_BOTTOM",
+          "UPPER_LIP_TOP"
+        };
+      for (int j = 0; j < conTourTypes.length; j++) {
+        FaceContour contour = face.getContour(conTourTypes[j]);
+        if (contour == null) {
+          Log.v(
+                  MANUAL_TESTING_LOG,
+                  "No contour of type: " + conTourTypesStrings[j] + " has been detected");
+        } else {
+          List<PointF> conTourPosition = contour.getPoints();
+          for (int k=0; k<conTourPosition.size(); k++){
+            Log.d("Contour", "Contour of " + conTourTypesStrings[j] + " " + k +": " + conTourPosition.get(k).x + conTourPosition.get(k).y);
+          }
+        }
+      }
     }
   }
 

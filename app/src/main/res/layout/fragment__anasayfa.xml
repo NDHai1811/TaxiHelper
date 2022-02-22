@@ -4,9 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:foregroundGravity="top"
     tools:context=".MainActivity">
+
+    <com.scwang.wave.MultiWaveHeader
+        android:id="@+id/waveHeader"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mwhCloseColor="@color/blue"
+        app:mwhStartColor="@color/colorAccent"
+        app:mwhWaveHeight="60dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutheader"
@@ -17,6 +29,8 @@
 
         android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -24,26 +38,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
             android:text="Hello,"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="15dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="15dp"
             android:text="A"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/texthello"
-            tools:ignore="MissingConstraints"
-            android:layout_marginLeft="4dp" />
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -65,7 +79,8 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
 
             <RelativeLayout
@@ -104,9 +119,11 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
+                android:id="@+id/hdsd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -152,7 +169,8 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -185,7 +203,8 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -218,18 +237,18 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="100dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/facebook"
+        android:src="@drawable/facebook"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/instagram"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
@@ -239,11 +258,11 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/discord"
+        android:layout_marginEnd="60dp"
+        android:src="@drawable/discord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 

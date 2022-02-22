@@ -18,26 +18,39 @@ package com.google.mlkit.vision.demo.java;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
+
 import com.google.android.gms.common.annotation.KeepName;
+import com.google.android.gms.vision.face.Face;
+import com.google.mlkit.vision.demo.BitmapUtils;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
@@ -49,6 +62,7 @@ import com.google.mlkit.vision.face.FaceDetectorOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /** Live preview demo for ML Kit APIs. */
 @KeepName
@@ -68,11 +82,16 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   Handler handler = new Handler();
   Runnable runnable;
-  int delay = 100;
+  int delay = 10;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    getSupportActionBar().hide();
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
     Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_vision_live_preview);
@@ -85,6 +104,28 @@ public final class LivePreviewActivity extends AppCompatActivity
     if (graphicOverlay == null) {
       Log.d(TAG, "graphicOverlay is null");
     }
+
+    cdText = findViewById(R.id.countdown_text);
+    cdBtn = findViewById(R.id.countdown_btn);
+    blink = findViewById(R.id.blinkCount);
+    ms = findViewById(R.id.millisec);
+
+    Button exitbtn = (Button) findViewById(R.id.exitBtn);
+    exitbtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        finish();
+      }
+    });
+
+    cdBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startStop();
+      }
+    });
+
+    updateTimer();
 
     ToggleButton facingSwitch = findViewById(R.id.facing_switch);
     facingSwitch.setOnCheckedChangeListener(this);
@@ -206,19 +247,73 @@ public final class LivePreviewActivity extends AppCompatActivity
 
 
   double data;
+  float left, right;
   public void getData(FaceDetectorProcessor processor) {
     data = processor.look;
+    left = processor.left;
+    right = processor.right;
 //    Toast.makeText(this, "Here is data"+lOrR, Toast.LENGTH_SHORT).show();
     Log.v("ddd", "OK "+data);
+    Log.v("ddd", "eye "+value);
     sleepDetection();
   }
+  int blinkCount=0, counter=0;
+  long start, end, time;
+  boolean blinkyet = false;
+  float value;
+  private final float OPEN_THRESHOLD = (float) 0.85;
+  private final float CLOSE_THRESHOLD = (float) 0.05;
+
+  private int state = 0;
+
   public void sleepDetection(){
     if(data<-30){
-      Log.v("ddd", "You're looking right");
+      Log.v("ddd", "You're looking right ");
     }
     if(data>30){
-      Log.v("ddd", "You're looking left");
+      Log.v("ddd", "You're looking left ");
     }
+
+    if ((left == Face.UNCOMPUTED_PROBABILITY) ||
+            (right == Face.UNCOMPUTED_PROBABILITY)) {
+      // One of the eyes was not detected.
+      return;
+    }
+    switch (state) {
+      case 0:
+        if ((left > OPEN_THRESHOLD) && (right > OPEN_THRESHOLD)) {
+          // Both eyes are initially open
+          Log.d("BlinkTracker", "Both eyes are initially open");
+          state = 1;
+        }
+        break;
+
+      case 1:
+        if ((left < CLOSE_THRESHOLD) && (right < CLOSE_THRESHOLD)) {
+          // Both eyes become closed
+          Log.d("BlinkTracker", "Both eyes become closed");
+          start = System.nanoTime();
+          state = 2;
+        }
+        break;
+
+      case 2:
+        if ((left > OPEN_THRESHOLD) && (right > OPEN_THRESHOLD)) {
+          // Both eyes are open again
+          Log.d("BlinkTracker", "Both eyes are open again");
+          end = System.nanoTime();
+          time = ((end - start) / 1000000);
+          state = 0;
+        }
+        break;
+    }
+
+
+
+    value = Math.min(left, right);
+    ms.setText(""+value);
+    blink.setText(""+time+"ms");
+
   }
 
   /** Stops the camera. */
@@ -294,4 +389,60 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.i(TAG, "Permission NOT granted: " + permission);
     return false;
   }
+
+  private TextView cdText, blink, ms;
+  private Button cdBtn;
+  private CountDownTimer countDownTimer;
+  private long timerLeftInMilisec = 600000;
+  private boolean timerRunning = false;
+
+  public void startStop(){
+    if (timerRunning==false){
+      startTimer();
+    }
+    else{
+      stopTimer();
+    }
+  }
+
+  public void startTimer(){
+    countDownTimer = new CountDownTimer(timerLeftInMilisec, 1000) {
+      @Override
+      public void onTick(long l) {
+        timerLeftInMilisec = l;
+        updateTimer();
+      }
+
+      @Override
+      public void onFinish() {
+
+      }
+    }.start();
+    cdBtn.setText("PAUSE");
+    timerRunning = true;
+  }
+  public void stopTimer(){
+    countDownTimer.cancel();
+    cdBtn.setText("START");
+    timerRunning = false;
+  }
+
+  public void updateTimer() {
+    int minutes = (int) timerLeftInMilisec/60000;
+    int seconds = (int) timerLeftInMilisec%60000/1000;
+    String timeLeftText;
+
+    timeLeftText = ""+minutes;
+    timeLeftText += ":";
+    if(seconds<10){
+      timeLeftText+="0";
+    }
+
+    if (seconds==0){
+      blinkCount=0;
+    }
+    timeLeftText+=seconds;
+    cdText.setText(timeLeftText);
+  }
+
 }

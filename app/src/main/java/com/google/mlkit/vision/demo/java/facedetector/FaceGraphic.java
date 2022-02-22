@@ -33,7 +33,7 @@ import java.util.Locale;
  * graphic overlay view.
  */
 public class FaceGraphic extends Graphic {
-  private static final float FACE_POSITION_RADIUS = 8.0f;
+  private static final float FACE_POSITION_RADIUS = 5.0f;
   private static final float ID_TEXT_SIZE = 30.0f;
   private static final float ID_Y_OFFSET = 40.0f;
   private static final float BOX_STROKE_WIDTH = 5.0f;
@@ -54,6 +54,7 @@ public class FaceGraphic extends Graphic {
       };
 
   private final Paint facePositionPaint;
+  private final Paint faceContourPositionPaint;
   private final Paint[] idPaints;
   private final Paint[] boxPaints;
   private final Paint[] labelPaints;
@@ -68,6 +69,9 @@ public class FaceGraphic extends Graphic {
 
     facePositionPaint = new Paint();
     facePositionPaint.setColor(selectedColor);
+
+    faceContourPositionPaint = new Paint();
+    faceContourPositionPaint.setColor(Color.RED);
 
     int numColors = COLORS.length;
     idPaints = new Paint[numColors];
@@ -178,6 +182,15 @@ public class FaceGraphic extends Graphic {
         canvas.drawCircle(
             translateX(point.x), translateY(point.y), FACE_POSITION_RADIUS, facePositionPaint);
       }
+      FaceContour ctLipBot = face.getContour(FaceContour.UPPER_LIP_BOTTOM);
+
+      canvas.drawCircle(
+              translateX(ctLipBot.getPoints().get(4).x), translateY(ctLipBot.getPoints().get(4).y), FACE_POSITION_RADIUS, faceContourPositionPaint);
+
+      FaceContour ctLipTop = face.getContour(FaceContour.LOWER_LIP_TOP);
+
+      canvas.drawCircle(
+              translateX(ctLipTop.getPoints().get(4).x), translateY(ctLipTop.getPoints().get(4).y), FACE_POSITION_RADIUS, faceContourPositionPaint);
     }
 
     // Draws smiling and left/right eye open probabilities.

@@ -9,24 +9,24 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="307dp"
-        android:layout_height="61dp"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
         android:layout_marginTop="60dp"
+        android:gravity="center"
         android:text="Không có thông báo"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.613"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="323dp"
-        android:layout_height="287dp"
+        android:layout_width="247dp"
+        android:layout_height="370dp"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"

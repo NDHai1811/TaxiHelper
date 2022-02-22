@@ -1,14 +1,19 @@
 package com.google.mlkit.vision.demo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
+import com.google.mlkit.vision.demo.preference.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +65,15 @@ public class Fragment_Cards extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment__cards,container,false);
+        TextView button = (TextView) view.findViewById(R.id.textView3);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+            intent.putExtra(
+                    SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
+            startActivity(intent);
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__cards, container, false);
+        return view;
     }
 }
