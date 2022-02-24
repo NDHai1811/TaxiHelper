@@ -18,8 +18,8 @@
       android:id="@+id/graphic_overlay"
       android:layout_width="0dp"
       android:layout_height="match_parent"
-      app:layout_constraintStart_toStartOf="@id/preview_view"
-      app:layout_constraintEnd_toEndOf="@id/preview_view" />
+      app:layout_constraintEnd_toStartOf="@+id/frame_layout"
+      app:layout_constraintStart_toStartOf="@id/preview_view" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@id/control"
@@ -72,11 +72,11 @@
         android:id="@+id/countdown_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="118dp"
         android:text="Start"
-        app:layout_constraintBottom_toTopOf="@+id/facing_switch"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_button" />
 
     <TextView
         android:id="@+id/blinkCount"
@@ -110,5 +110,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_button" />
   </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <FrameLayout
+      android:id="@+id/frame_layout"
+      android:layout_width="250dp"
+      android:layout_height="match_parent"
+      app:layout_constraintEnd_toEndOf="@+id/preview_view"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
