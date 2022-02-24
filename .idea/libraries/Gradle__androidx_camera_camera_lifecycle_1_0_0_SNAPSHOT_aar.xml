@@ -5,14 +5,14 @@
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/064b13929293a152cfce40004256cad3/jetified-camera-lifecycle-1.0.0-SNAPSHOT/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/064b13929293a152cfce40004256cad3/jetified-camera-lifecycle-1.0.0-SNAPSHOT/res" />
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/064b13929293a152cfce40004256cad3/jetified-camera-lifecycle-1.0.0-SNAPSHOT/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/res" />
       <root url="file://C:/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/res" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://C:/caches/transforms-2/files-2.1/23c1967b50b63efef734e08d71f1cab7/jetified-camera-lifecycle-1.0.0-SNAPSHOT/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.camera/camera-lifecycle/1.0.0-SNAPSHOT/c5f15ecdf95d16b54e6e024a8a9d43e131c7247f/camera-lifecycle-1.0.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://C:/caches/modules-2/files-2.1/androidx.camera/camera-lifecycle/1.0.0-SNAPSHOT/c5f15ecdf95d16b54e6e024a8a9d43e131c7247f/camera-lifecycle-1.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

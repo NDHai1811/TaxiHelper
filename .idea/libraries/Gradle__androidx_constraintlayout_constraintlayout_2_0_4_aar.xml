@@ -4,9 +4,9 @@
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/5460d7e1dc355e668885a763cf04ce38/constraintlayout-2.0.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/5460d7e1dc355e668885a763cf04ce38/constraintlayout-2.0.4/res" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/5460d7e1dc355e668885a763cf04ce38/constraintlayout-2.0.4/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/res" />
+      <root url="file://C:/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/AndroidManifest.xml" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/jars/classes.jar!/" />
+      <root url="file://C:/caches/transforms-2/files-2.1/906f9479239cd7b38dd159b90d8e77af/constraintlayout-2.0.4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
