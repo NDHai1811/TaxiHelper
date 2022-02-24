@@ -23,23 +23,32 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.android.gms.vision.face.Face;
@@ -48,6 +57,7 @@ import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
+import com.google.mlkit.vision.demo.map.MapsFragment;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
@@ -71,10 +81,15 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = FACE_DETECTION;
+  public StringBuilder stFromFm;
 
   Handler handler = new Handler();
   Runnable runnable;
   int delay = 10;
+  FragmentManager fm;
+  private boolean fmAppear = false;
+  private Fragment fragment;
+  private MapsFragment mapsFragment;
 
 
   @Override
@@ -101,6 +116,8 @@ public final class LivePreviewActivity extends AppCompatActivity
     cdBtn = findViewById(R.id.countdown_btn);
     blink = findViewById(R.id.blinkCount);
     ms = findViewById(R.id.millisec);
+    fm = getSupportFragmentManager();
+
 
     Button exitbtn = (Button) findViewById(R.id.exitBtn);
     exitbtn.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +137,36 @@ public final class LivePreviewActivity extends AppCompatActivity
     updateTimer();
 
     ToggleButton facingSwitch = findViewById(R.id.facing_switch);
-    facingSwitch.setOnCheckedChangeListener(this);
+
+//    facingSwitch.setOnCheckedChangeListener(this);
+    FragmentTransaction ft_add = fm.beginTransaction();
+    ft_add.add(R.id.frame_layout, new MapsFragment(), "fragment1");
+    ft_add.commit();
+    fmAppear=true;
+
+    Fragment fragment = fm.findFragmentById(R.id.frame_layout);
+    FragmentTransaction ft_remo = fm.beginTransaction();
+    if (fragment!=null){
+      ft_remo.hide(fragment);
+    }
+    ft_remo.commit();
+
+    facingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (b) {
+          Fragment fragment = fm.findFragmentById(R.id.frame_layout);
+          FragmentTransaction ft_remo = fm.beginTransaction();
+          ft_remo.hide(fragment);
+          ft_remo.commit();
+        } else {
+          Fragment fragment = fm.findFragmentById(R.id.frame_layout);
+          FragmentTransaction ft_remo = fm.beginTransaction();
+          ft_remo.show(fragment);
+          ft_remo.commit();
+        }
+      }
+    });
 
     ImageView settingsButton = findViewById(R.id.settings_button);
     settingsButton.setOnClickListener(
@@ -261,9 +307,13 @@ public final class LivePreviewActivity extends AppCompatActivity
   public void sleepDetection(){
     if(data<-30){
       Log.v("ddd", "You're looking right ");
+      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
     }
     if(data>30){
       Log.v("ddd", "You're looking left ");
+      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     if ((left == Face.UNCOMPUTED_PROBABILITY) ||

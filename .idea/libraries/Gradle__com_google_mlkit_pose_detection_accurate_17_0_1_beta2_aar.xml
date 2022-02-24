@@ -1,14 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.mlkit:pose-detection-accurate:17.0.1-beta2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/res" />
-      <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/3183d31674f28b6c18ebfe5c908763fb/jetified-pose-detection-accurate-17.0.1-beta2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/3183d31674f28b6c18ebfe5c908763fb/jetified-pose-detection-accurate-17.0.1-beta2/res" />
-      <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/3183d31674f28b6c18ebfe5c908763fb/jetified-pose-detection-accurate-17.0.1-beta2/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/res" />
-      <root url="file://C:/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1ad108dae640271c81258e7fe913c639/jetified-pose-detection-accurate-17.0.1-beta2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/pose-detection-accurate/17.0.1-beta2/8435e9b94bae77d2dcfc74ab6ca589a2ba45f694/pose-detection-accurate-17.0.1-beta2-javadoc.jar!/" />
