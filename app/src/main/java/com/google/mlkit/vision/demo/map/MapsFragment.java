@@ -1,19 +1,9 @@
 package com.google.mlkit.vision.demo.map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,6 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -34,12 +31,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 
@@ -57,8 +50,6 @@ public class MapsFragment extends Fragment {
     FusedLocationProviderClient mFusedLocationClient;
     StringBuilder sb;
 
-    public boolean fmAppear;
-
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -70,18 +61,19 @@ public class MapsFragment extends Fragment {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+        @SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//            LatLng sydney = new LatLng(-34, 151);
+//            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
             mGoogleMap = googleMap;
             mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(60*60000); // two minute interval
-            mLocationRequest.setFastestInterval(60000);
+            mLocationRequest.setInterval(60000); // two minute interval
+            mLocationRequest.setFastestInterval(30000);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -119,22 +111,28 @@ public class MapsFragment extends Fragment {
 
                     //Place current location marker
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.position(latLng);
-//                markerOptions.title("Current Position");
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-//                mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
                     //move map camera
                     mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
 
-                    Geocoder geocoder = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
+
                     try {
+                        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                         sb = new StringBuilder();
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
                             sb.append(address.getAddressLine(0));
+                            Bundle bundle = new Bundle();
+                            bundle.putString("params", "My String data");
+                            LivePreviewActivity activity = new LivePreviewActivity();
+                            activity.dataFromFm(latLng.latitude,
+                                    latLng.longitude,
+                                    address.getAddressLine(0),
+                                    addresses.get(0).getLocality(),
+                                    addresses.get(0).getPostalCode(),
+                                    addresses.get(0).getAdminArea(),
+                                    addresses.get(0).getCountryName());
                         }
                         Log.d("TAG",""+ sb);
 

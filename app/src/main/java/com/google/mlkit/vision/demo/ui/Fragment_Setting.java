@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.transition.MaterialFadeThrough;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.ViewDialog;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
 
 /**
@@ -58,6 +60,8 @@ public class Fragment_Setting extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setEnterTransition(new MaterialFadeThrough());
+        setExitTransition(new MaterialFadeThrough());
     }
 
     @Override
@@ -66,10 +70,13 @@ public class Fragment_Setting extends Fragment {
         View view=inflater.inflate(R.layout.fragment_setting,container,false);
         TextView button = (TextView) view.findViewById(R.id.textView3);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-            intent.putExtra(
-                    SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//            intent.putExtra(
+//                    SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
+//            startActivity(intent);
+
+            ViewDialog alert = new ViewDialog();
+            alert.showDialog(getActivity(), "Sleep Alert!!!");
         });
         // Inflate the layout for this fragment
         return view;

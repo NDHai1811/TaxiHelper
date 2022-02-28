@@ -6,12 +6,15 @@
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/d841329954d822bdef95f8fc81773590/jetified-object-detection-custom-16.3.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/d841329954d822bdef95f8fc81773590/jetified-object-detection-custom-16.3.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/res" />
-      <root url="file://C:/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/res" />
-      <root url="file://C:/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/AndroidManifest.xml" />
-      <root url="jar://C:/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/res" />
+      <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91753c5f6ca32d39b38478dff5f240f4/jetified-object-detection-custom-16.3.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://C:/caches/modules-2/files-2.1/com.google.mlkit/object-detection-custom/16.3.1/d107ddeb3a49570ad7257642a62e384c159a965c/object-detection-custom-16.3.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.google.mlkit/object-detection-custom/16.3.1/d107ddeb3a49570ad7257642a62e384c159a965c/object-detection-custom-16.3.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/object-detection-custom/16.3.1/d107ddeb3a49570ad7257642a62e384c159a965c/object-detection-custom-16.3.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

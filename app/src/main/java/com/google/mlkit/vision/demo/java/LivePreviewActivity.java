@@ -51,6 +51,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.annotation.KeepName;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.vision.face.Face;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
@@ -238,6 +239,8 @@ public final class LivePreviewActivity extends AppCompatActivity
               getData(processor);
             }
           }, delay);
+
+
           break;
         default:
           Log.e(TAG, "Unknown model: " + model);
@@ -485,6 +488,11 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
     timeLeftText+=seconds;
     cdText.setText(timeLeftText);
+  }
+
+  public void dataFromFm(double lat, double lng, String address, String city,String zip, String state, String country) {
+
+    Log.d("Address", lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country);
   }
 
 }
