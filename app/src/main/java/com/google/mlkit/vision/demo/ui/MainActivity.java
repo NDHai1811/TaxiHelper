@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 import android.view.Window;
 
@@ -26,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        ///////////////////////////////////////////////////////////
-        toolbar = getSupportActionBar();
-
-        toolbar.setTitle("Shop");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,23 +34,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 switch (item.getItemId()) {
-                    case R.id.navigation_shop:
-                        toolbar.setTitle("Trang chủ");
+                    case R.id.navigation_home:
                         fragment=new Fragment_Home();
                         Fragment_load(fragment);
                         return true;
-                    case R.id.navigation_gifts:
-                        toolbar.setTitle("Thông báo");
+                    case R.id.navigation_notify:
                         fragment=new Fragment_Notify();
                         Fragment_load(fragment);
                         return true;
-                    case R.id.navigation_cart:
-                        toolbar.setTitle("Cài đặt");
-                        fragment=new Fragment_Setting();
-                        Fragment_load(fragment);
-                        return true;
+//                    case R.id.navigation_setting:
+//                        fragment=new Fragment_Setting();
+//                        Fragment_load(fragment);
+//                        return true;
                     case R.id.navigation_profile:
-                        toolbar.setTitle("Profile");
                         fragment=new Fragment_Profile();
                         Fragment_load(fragment);
                         return true;
@@ -69,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container,fragment);
         transaction.addToBackStack(null);
+        transaction.setReorderingAllowed(true);
         transaction.commit();
     }
 }
