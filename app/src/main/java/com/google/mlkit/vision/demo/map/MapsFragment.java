@@ -2,6 +2,7 @@ package com.google.mlkit.vision.demo.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -49,6 +50,7 @@ public class MapsFragment extends Fragment {
     Marker mCurrLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
     StringBuilder sb;
+    int count=0;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -117,7 +119,9 @@ public class MapsFragment extends Fragment {
 
 
                     try {
-                        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                        count++;
+                        Log.d("Test", "onLocationResult: They are used "+count+" times");
+                        Geocoder geocoder = new Geocoder(thiscontext, Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                         sb = new StringBuilder();
                         if (addresses.size() > 0) {
@@ -145,7 +149,7 @@ public class MapsFragment extends Fragment {
 
         public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
         private void checkLocationPermission() {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            if (ContextCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
 
                 // Should we show an explanation?
@@ -180,6 +184,7 @@ public class MapsFragment extends Fragment {
             }
         }
     };
+    private Context thiscontext;
 
     @Nullable
     @Override
@@ -189,8 +194,7 @@ public class MapsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
         Log.d("Map", "Created");
-        LivePreviewActivity myActivity = (LivePreviewActivity) getActivity();
-        myActivity.stFromFm = sb;
+        thiscontext = container.getContext();
         return view;
     }
 
@@ -203,5 +207,10 @@ public class MapsFragment extends Fragment {
             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
             mapFragment.getMapAsync(callback);
         }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 }

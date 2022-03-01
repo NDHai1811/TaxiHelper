@@ -17,6 +17,7 @@
 package com.google.mlkit.vision.demo.java;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -40,6 +41,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -88,14 +91,14 @@ public final class LivePreviewActivity extends AppCompatActivity
   Runnable runnable;
   int delay = 10;
   FragmentManager fm;
-  private boolean fmAppear = false;
-  private Fragment fragment;
-  private MapsFragment mapsFragment;
+
+
 
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    //hide tool bar and show in full screen
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     getSupportActionBar().hide();
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -119,15 +122,30 @@ public final class LivePreviewActivity extends AppCompatActivity
     ms = findViewById(R.id.millisec);
     fm = getSupportFragmentManager();
 
-
+// exit yea for sure
     Button exitbtn = (Button) findViewById(R.id.exitBtn);
     exitbtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        finish();
+        new AlertDialog.Builder(LivePreviewActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Quiting App?")
+                .setMessage("Are you sure to exit?")
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+
+                    //Stop the activity
+                    finish();
+                  }
+
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
       }
     });
-
+//test countdown timer
     cdBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -139,11 +157,10 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     ToggleButton facingSwitch = findViewById(R.id.facing_switch);
 
-//    facingSwitch.setOnCheckedChangeListener(this);
+//    create map fragment
     FragmentTransaction ft_add = fm.beginTransaction();
     ft_add.add(R.id.frame_layout, new MapsFragment(), "fragment1");
     ft_add.commit();
-    fmAppear=true;
 
     Fragment fragment = fm.findFragmentById(R.id.frame_layout);
     FragmentTransaction ft_remo = fm.beginTransaction();
@@ -152,6 +169,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
     ft_remo.commit();
 
+    //turn on off map fragment
     facingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -169,6 +187,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       }
     });
 
+    //open setting
     ImageView settingsButton = findViewById(R.id.settings_button);
     settingsButton.setOnClickListener(
         v -> {
@@ -177,7 +196,7 @@ public final class LivePreviewActivity extends AppCompatActivity
               SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
           startActivity(intent);
         });
-
+//check permission - if granted, do detect
     if (allPermissionsGranted()) {
       createCameraSource(selectedModel);
     } else {
@@ -494,5 +513,4 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     Log.d("Address", lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country);
   }
-
 }

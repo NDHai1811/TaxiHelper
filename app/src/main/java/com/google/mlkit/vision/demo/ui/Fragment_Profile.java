@@ -1,5 +1,6 @@
 package com.google.mlkit.vision.demo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,9 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.material.transition.MaterialFadeThrough;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.preference.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +20,8 @@ import com.google.mlkit.vision.demo.R;
  * create an instance of this fragment.
  */
 public class Fragment_Profile extends Fragment {
+
+    ImageView setting;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,12 +63,24 @@ public class Fragment_Profile extends Fragment {
         }
         setEnterTransition(new MaterialFadeThrough());
         setExitTransition(new MaterialFadeThrough());
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_profile,container,false);
+        setting = view.findViewById(R.id.settingView);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                intent.putExtra(SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
+                startActivity(intent);
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return view;
     }
 }
