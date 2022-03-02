@@ -1,17 +1,25 @@
 package com.google.mlkit.vision.demo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ViewDialog {
+public class ViewDialog extends AlertDialog {
+
+    public Dialog dialog = null;
+    int count = 0;
+    public ViewDialog(Context context) {
+        super(context);
+    }
 
     public void showDialog(Activity activity, String msg){
-        final Dialog dialog = new Dialog(activity);
+        dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog);
@@ -25,11 +33,12 @@ public class ViewDialog {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
             }
         });
-
-        dialog.show();
-
+        dialog.create();
+        if (dialog != null && !dialog.isShowing()) {
+            dialog.show();
+            count++;
+        }
     }
 }

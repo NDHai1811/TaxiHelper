@@ -75,4 +75,14 @@
         android:title="@string/pref_title_face_detector_min_face_size"/>
   </PreferenceCategory>
 
+  <PreferenceCategory>
+
+    <EditTextPreference
+        android:defaultValue="100"
+        android:key="edit_text_preference_1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Setting here" />
+  </PreferenceCategory>
+
 </PreferenceScreen>

@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
+  <Chronometer
+      android:id="@+id/cmTimer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/graphic_overlay"
+      app:layout_constraintTop_toTopOf="@+id/preview_view" />
+
   <Button
       android:id="@+id/exitBtn"
       android:layout_width="wrap_content"

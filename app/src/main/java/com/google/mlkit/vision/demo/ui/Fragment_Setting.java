@@ -70,13 +70,10 @@ public class Fragment_Setting extends Fragment {
         View view=inflater.inflate(R.layout.fragment_setting,container,false);
         TextView button = (TextView) view.findViewById(R.id.textView3);
         button.setOnClickListener(v -> {
-//            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-//            intent.putExtra(
-//                    SettingsActivity.EXTRA_LAUNCH_SOURCE, SettingsActivity.LaunchSource.LIVE_PREVIEW);
-//            startActivity(intent);
 
-            ViewDialog alert = new ViewDialog();
-            alert.showDialog(getActivity(), "Sleep Alert!!!");
+
+//            ViewDialog alert = new ViewDialog();
+//            alert.showDialog(getActivity(), "Sleep Alert!!!");
         });
         // Inflate the layout for this fragment
         return view;

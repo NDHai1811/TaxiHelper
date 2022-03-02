@@ -40,7 +40,8 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
 
   private final FaceDetector detector;
   public double look;
-  public float left, right;
+  public float left, right, eulerX, eulerY, eulerZ;
+  public boolean hasface = false;
 
   public FaceDetectorProcessor(Context context) {
     this(
@@ -78,7 +79,15 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
         right = face.getRightEyeOpenProbability();
       }
 
-
+      if (face !=null){
+        eulerX = face.getHeadEulerAngleX();
+        eulerY = face.getHeadEulerAngleY();
+        eulerZ = face.getHeadEulerAngleZ();
+        hasface = true;
+      }
+      else{
+        hasface = false;
+      }
       logExtrasForTesting(face);
     }
   }

@@ -24,28 +24,24 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.core.content.ContextCompat;
@@ -54,12 +50,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.vision.face.Face;
+import com.google.mlkit.vision.demo.AlertCalculate;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.ViewDialog;
 import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
 import com.google.mlkit.vision.demo.map.MapsFragment;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
@@ -91,6 +88,8 @@ public final class LivePreviewActivity extends AppCompatActivity
   Runnable runnable;
   int delay = 10;
   FragmentManager fm;
+  private volatile com.google.mlkit.vision.face.Face face;
+  AlertCalculate alertCalculate;
 
 
 
@@ -121,6 +120,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     blink = findViewById(R.id.blinkCount);
     ms = findViewById(R.id.millisec);
     fm = getSupportFragmentManager();
+    alertCalculate = new AlertCalculate(this, this);
 
 // exit yea for sure
     Button exitbtn = (Button) findViewById(R.id.exitBtn);
@@ -308,14 +308,34 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   double data;
   float left, right;
+  int headstate;
+  AlertCalculate check = new AlertCalculate(this, this);
   public void getData(FaceDetectorProcessor processor) {
-    data = processor.look;
-    left = processor.left;
-    right = processor.right;
+    if (processor.hasface==true) {
+      data = processor.look;
+      left = processor.left;
+      right = processor.right;
 //    Toast.makeText(this, "Here is data"+lOrR, Toast.LENGTH_SHORT).show();
-    Log.v("ddd", "OK "+data);
-    Log.v("ddd", "eye "+value);
-    sleepDetection();
+      Log.v("ddd", "OK " + data);
+      Log.v("ddd", "eye " + value);
+      sleepDetection();
+
+      if (processor.hasface) {
+        Log.d("TAG", "getData: has face");
+        Log.d("TAG1", "getDataX: " + processor.eulerX);
+        Log.d("TAG1", "getDataY: " + processor.eulerY);
+        Log.d("TAG1", "getDataZ: " + processor.eulerZ);
+      } else {
+        Log.d("TAG", "getData: no face");
+      }
+
+      int timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
+      if (timeout>2000){
+        ViewDialog alert = new ViewDialog(getApplicationContext());
+            alert.showDialog(this, "Sleep Alert!!!");
+      }
+    }
+
   }
   int blinkCount=0, counter=0;
   long start, end, time;
@@ -327,16 +347,16 @@ public final class LivePreviewActivity extends AppCompatActivity
   private int state = 0;
 
   public void sleepDetection(){
-    if(data<-30){
-      Log.v("ddd", "You're looking right ");
-      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-    }
-    if(data>30){
-      Log.v("ddd", "You're looking left ");
-      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-    }
+//    if(data<-30){
+//      Log.v("ddd", "You're looking right ");
+//      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+//    }
+//    if(data>30){
+//      Log.v("ddd", "You're looking left ");
+//      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+//    }
 
     if ((left == Face.UNCOMPUTED_PROBABILITY) ||
             (right == Face.UNCOMPUTED_PROBABILITY)) {
@@ -367,6 +387,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           Log.d("BlinkTracker", "Both eyes are open again");
           end = System.nanoTime();
           time = ((end - start) / 1000000);
+
           state = 0;
         }
         break;
@@ -457,7 +478,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   private TextView cdText, blink, ms;
   private Button cdBtn;
   private CountDownTimer countDownTimer;
-  private long timerLeftInMilisec = 600000;
+  private long timerLeftInMilisec = 30;
+  long intervalSeconds = 1;
+  long timeDown=0;
   private boolean timerRunning = false;
 
   public void startStop(){
@@ -470,16 +493,18 @@ public final class LivePreviewActivity extends AppCompatActivity
   }
 
   public void startTimer(){
-    countDownTimer = new CountDownTimer(timerLeftInMilisec, 1000) {
+    countDownTimer = new CountDownTimer(timerLeftInMilisec*1000, intervalSeconds*1000) {
       @Override
       public void onTick(long l) {
-        timerLeftInMilisec = l;
+//        timerLeftInMilisec = l;
+        timeDown = (timerLeftInMilisec * 1000 - l) / 1000;
+        Log.d("TAG2", "onTick: "+ (timerLeftInMilisec * 1000 - l) / 1000);
         updateTimer();
       }
 
       @Override
       public void onFinish() {
-
+        Log.d("TAG2", "onFinish: Time's up");
       }
     }.start();
     cdBtn.setText("PAUSE");

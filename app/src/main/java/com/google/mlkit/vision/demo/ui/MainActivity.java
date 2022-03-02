@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment=new Fragment_Notify();
                         Fragment_load(fragment);
                         return true;
-//                    case R.id.navigation_setting:
-//                        fragment=new Fragment_Setting();
-//                        Fragment_load(fragment);
-//                        return true;
+                    case R.id.navigation_setting:
+                        fragment=new SettingsFragment2();
+                        Fragment_load(fragment);
+                        return true;
                     case R.id.navigation_profile:
                         fragment=new Fragment_Profile();
                         Fragment_load(fragment);
