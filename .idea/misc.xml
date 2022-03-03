@@ -32,9 +32,11 @@
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout-land/activity_vision_live_preview.xml" value="0.2140625" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout-land/fragment_home.xml" value="0.21516754850088182" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_note.xml" value="0.152" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_settings.xml" value="0.1598731884057971" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_splash.xml" value="0.12360688956433637" />
-        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_test_ui.xml" value="0.18614130434782608" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_test_ui.xml" value="0.4" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_trafficsign.xml" value="0.24320652173913043" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_vision_live_preview.xml" value="0.1598731884057971" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment__anasayfa.xml" value="0.2569444444444444" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_home.xml" value="0.2509057971014493" />
@@ -48,6 +50,7 @@
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/splashscreen.xml" value="0.18614130434782608" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/toggle_style.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/menu/navigation.xml" value="0.17962962962962964" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/xml/root_preferences.xml" value="0.264" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/xml/settings.xml" value="0.12360688956433637" />
       </map>
     </option>

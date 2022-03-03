@@ -21,7 +21,7 @@
             android:background="@drawable/ctr_bg"
             android:fitsSystemWindows="true"
             app:expandedTitleTextColor="@color/white"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/blue1"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="Tra cứu thông tin">
 
@@ -29,6 +29,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/white"
+                app:subtitleTextColor="@color/white"
                 app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -58,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="none">
+                >
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card1"
@@ -188,7 +190,7 @@
                             android:layout_below="@id/img1"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Tra cứu mức độ sử phạt"
+                            android:text="Tra cứu phạt nguội"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 

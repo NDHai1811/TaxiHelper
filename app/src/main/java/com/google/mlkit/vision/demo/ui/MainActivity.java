@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_setting:
-                        fragment=new SettingsFragment2();
+                        fragment=new Fragment_Setting();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_profile:
