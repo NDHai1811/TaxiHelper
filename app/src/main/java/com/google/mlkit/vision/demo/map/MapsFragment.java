@@ -52,7 +52,7 @@ public class MapsFragment extends Fragment {
     StringBuilder sb;
     int count=0;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
          * Manipulates the map once available.
@@ -98,7 +98,7 @@ public class MapsFragment extends Fragment {
 
         }
 
-        LocationCallback mLocationCallback = new LocationCallback() {
+        final LocationCallback mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 List<Location> locationList = locationResult.getLocations();

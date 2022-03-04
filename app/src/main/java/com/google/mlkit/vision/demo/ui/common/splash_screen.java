@@ -18,7 +18,7 @@ import com.google.mlkit.vision.demo.ui.MainActivity;
 
 public class splash_screen extends AppCompatActivity {
 
-    private static int DELAY_TIME =5000;
+    private static final int DELAY_TIME =5000;
 
     //tạo các biến giá trị
     ImageView backgroundimg;

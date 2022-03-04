@@ -68,7 +68,7 @@ public class Fragment_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home,container,false);
-        CardView button = (CardView) view.findViewById(R.id.card1);
+        CardView button = view.findViewById(R.id.card1);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -79,7 +79,7 @@ public class Fragment_Home extends Fragment {
             }
         });
 
-        CardView button2 = (CardView) view.findViewById(R.id.cardhd);
+        CardView button2 = view.findViewById(R.id.cardhd);
         button2.setOnClickListener(new View.OnClickListener()
         {
             @Override

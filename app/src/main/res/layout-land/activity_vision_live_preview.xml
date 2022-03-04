@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
+
   <com.google.mlkit.vision.demo.CameraSourcePreview
       android:id="@+id/preview_view"
       android:layout_width="0dp"
@@ -116,5 +117,11 @@
       android:layout_width="250dp"
       android:layout_height="match_parent"
       app:layout_constraintEnd_toEndOf="@+id/preview_view"></FrameLayout>
+  <Switch
+      android:id="@+id/switch1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Switch"
+      android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

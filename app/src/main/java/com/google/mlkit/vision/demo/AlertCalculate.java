@@ -16,6 +16,7 @@ public class AlertCalculate {
     public int time;
     public int state = 0;
     Vibrator vibrator;
+    public int count;
 
     Context mContext;
     Activity mActivity;
@@ -25,14 +26,11 @@ public class AlertCalculate {
         this.mActivity = activity;
     }
     public boolean eyeBlink(float left_eye, float right_eye){
-        if (left_eye <0.005 && right_eye < 0.005){
-            return true;
-        }
-        return false;
+        return left_eye < 0.005 && right_eye < 0.005;
     }
 
     public void startVibrate() {
-        long pattern[] = { 300, 700 };
+        long[] pattern = { 300, 700 };
         vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(pattern, 0);
     }
@@ -54,7 +52,7 @@ public class AlertCalculate {
         switch (state) {
             case 0:
                 if ((x > -20 && x<25) && (y > -20 && y<20)) {
-                    // Both eyes are initially open
+                    // Head is in of detect range
                     Log.d("Head", "In range instability");
                     state = 1;
                 }
@@ -62,26 +60,34 @@ public class AlertCalculate {
 
             case 1:
                 if (x<-20 || y<-20 || x>25 || y>20) {
-                    // Both eyes become closed
+                    // Head is out of detect range
                     Log.d("Head", "Out of range");
                     start = System.nanoTime();
                     state = 2;
-                    startVibrate();
+//                    startVibrate();
                 }
                 break;
 
             case 2:
                 if ((x > -20 && x<25) && (y > -20 && y<20)) {
-                    // Both eyes are open again
+                    // Head is back in of detect range
                     Log.d("Head", "In range");
                     end = System.nanoTime();
                     time = (int)((end - start) / 1000000);
-                    Log.d("Head", "time:"+time);
                     state = 0;
-                    stopVibrate();
+                    count=0;
+//                    stopVibrate();
                 }
                 break;
         }
-        return time;
+        if(x<-20 || y<-20 || x>25 || y>20){
+            count++;
+        }
+        Log.d("TAG3", "checkHead: "+count);
+        return state;
+    }
+
+    public boolean isLoseAttention(){
+        return count > 500;
     }
 }

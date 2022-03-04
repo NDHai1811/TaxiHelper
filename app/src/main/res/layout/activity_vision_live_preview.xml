@@ -7,15 +7,6 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-  <Chronometer
-      android:id="@+id/cmTimer"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textSize="20sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="@+id/graphic_overlay"
-      app:layout_constraintTop_toTopOf="@+id/preview_view" />
-
   <Button
       android:id="@+id/exitBtn"
       android:layout_width="wrap_content"
@@ -132,5 +123,21 @@
       android:layout_height="250dp"
       app:layout_constraintBottom_toBottomOf="@+id/preview_view"
       app:layout_constraintTop_toBottomOf="@+id/graphic_overlay" />
+  <Switch
+      android:id="@+id/switch1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Switch"
+      tools:visibility="gone" />
+
+  <ProgressBar
+      android:id="@+id/pbHeaderProgress"
+      style="?android:attr/progressBarStyleHorizontal"
+      android:layout_width="322dp"
+      android:layout_height="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@+id/preview_view"
+      app:layout_constraintStart_toStartOf="@+id/preview_view"
+      app:layout_constraintTop_toTopOf="@+id/preview_view"></ProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

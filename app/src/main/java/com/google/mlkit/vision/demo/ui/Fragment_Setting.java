@@ -68,7 +68,7 @@ public class Fragment_Setting extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_setting,container,false);
-        TextView button = (TextView) view.findViewById(R.id.textView3);
+        TextView button = view.findViewById(R.id.textView3);
         button.setOnClickListener(v -> {
 
 

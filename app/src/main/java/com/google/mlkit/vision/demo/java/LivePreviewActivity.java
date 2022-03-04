@@ -16,17 +16,17 @@
 
 package com.google.mlkit.vision.demo.java;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -36,10 +36,13 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -56,7 +59,6 @@ import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
-import com.google.mlkit.vision.demo.ViewDialog;
 import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
 import com.google.mlkit.vision.demo.map.MapsFragment;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
@@ -66,6 +68,7 @@ import com.google.mlkit.vision.face.FaceDetectorOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /** Live preview demo for ML Kit APIs. */
 @KeepName
@@ -82,16 +85,37 @@ public final class LivePreviewActivity extends AppCompatActivity
   private CameraSourcePreview preview;
   private GraphicOverlay graphicOverlay;
   private String selectedModel = FACE_DETECTION;
-  public StringBuilder stFromFm;
 
   Handler handler = new Handler();
   Runnable runnable;
   int delay = 10;
   FragmentManager fm;
-  private volatile com.google.mlkit.vision.face.Face face;
   AlertCalculate alertCalculate;
 
+  Switch mySwitch;
+  boolean isOut;
+  private TextView cdText, blink, ms;
+  private Button cdBtn;
+  private CountDownTimer countDownTimer;
+  private final long timerLeftInMilisec = 30;
+  long intervalSeconds = 1;
+  long timeDown=0;
+  private boolean timerRunning = false;
+  double data;
+  float left, right;
+  AlertCalculate check = new AlertCalculate(this, this);
+  int timeout;
+  int blinkCount=0;
+  long start, end, time;
+  float value;
+  private final float OPEN_THRESHOLD = (float) 0.85;
+  private final float CLOSE_THRESHOLD = (float) 0.05;
 
+  private int state = 0;
+
+  private int seconds = 0;
+  private boolean running;
+  private boolean wasRunning;
 
 
   @Override
@@ -105,6 +129,23 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_vision_live_preview);
+    running = true;
+    if (savedInstanceState != null) {
+
+      // Get the previous state of the stopwatch
+      // if the activity has been
+      // destroyed and recreated.
+      seconds
+              = savedInstanceState
+              .getInt("seconds");
+      running
+              = savedInstanceState
+              .getBoolean("running");
+      wasRunning
+              = savedInstanceState
+              .getBoolean("wasRunning");
+    }
+    runTimer();
 
     preview = findViewById(R.id.preview_view);
     if (preview == null) {
@@ -115,15 +156,43 @@ public final class LivePreviewActivity extends AppCompatActivity
       Log.d(TAG, "graphicOverlay is null");
     }
 
-    cdText = findViewById(R.id.countdown_text);
-    cdBtn = findViewById(R.id.countdown_btn);
-    blink = findViewById(R.id.blinkCount);
-    ms = findViewById(R.id.millisec);
-    fm = getSupportFragmentManager();
-    alertCalculate = new AlertCalculate(this, this);
+    //A trick to display alert=))
+    mySwitch = findViewById(R.id.switch1);
+    Dialog dialog = new Dialog(LivePreviewActivity.this);
+    isOut = check.isLoseAttention();
+    mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (mySwitch.isChecked()){
+          if(!dialog.isShowing()) {
+            dialog.setContentView(R.layout.dialog);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            TextView text = dialog.findViewById(R.id.text_dialog);
+            text.setText("ATTENTION!!!");
+            alertCalculate.startVibrate();
+            Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                dialog.dismiss();
+                alertCalculate.stopVibrate();
+              }
+            });
+            dialog.show();
+          }
+        }
+      }
+    });
+
+//    cdText = findViewById(R.id.countdown_text);//Countdown Textview
+    cdBtn = findViewById(R.id.countdown_btn);//Countdown button
+    blink = findViewById(R.id.blinkCount);//Count blink time
+    ms = findViewById(R.id.millisec);//A textview to display millisec
+    fm = getSupportFragmentManager();//A fragment manager to control map fragment
+    alertCalculate = new AlertCalculate(this, this);//Declare a class AlertCalculate to use its method
 
 // exit yea for sure
-    Button exitbtn = (Button) findViewById(R.id.exitBtn);
+    Button exitbtn = findViewById(R.id.exitBtn);
     exitbtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -146,10 +215,11 @@ public final class LivePreviewActivity extends AppCompatActivity
       }
     });
 //test countdown timer
+
     cdBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        startStop();
+
       }
     });
 
@@ -169,7 +239,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
     ft_remo.commit();
 
-    //turn on off map fragment
+    //turn on/off map fragment
     facingSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -202,6 +272,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     } else {
       getRuntimePermissions();
     }
+
   }
 
   @Override
@@ -301,15 +372,15 @@ public final class LivePreviewActivity extends AppCompatActivity
   public void onResume() {
     super.onResume();
     Log.d(TAG, "onResume");
+    if (wasRunning) {
+      running = true;
+    }
     createCameraSource(selectedModel);
     startCameraSource();
   }
 
 
-  double data;
-  float left, right;
-  int headstate;
-  AlertCalculate check = new AlertCalculate(this, this);
+//  Get data from FaceProcessor and use it
   public void getData(FaceDetectorProcessor processor) {
     if (processor.hasface==true) {
       data = processor.look;
@@ -329,35 +400,15 @@ public final class LivePreviewActivity extends AppCompatActivity
         Log.d("TAG", "getData: no face");
       }
 
-      int timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
-      if (timeout>2000){
-        ViewDialog alert = new ViewDialog(getApplicationContext());
-            alert.showDialog(this, "Sleep Alert!!!");
-      }
+      //get time calculated when lose attention
+      timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
+
+      mySwitch.setChecked(check.count > 300);
     }
-
   }
-  int blinkCount=0, counter=0;
-  long start, end, time;
-  boolean blinkyet = false;
-  float value;
-  private final float OPEN_THRESHOLD = (float) 0.85;
-  private final float CLOSE_THRESHOLD = (float) 0.05;
 
-  private int state = 0;
-
+//check eyes are blinking or not and calculate time of this
   public void sleepDetection(){
-//    if(data<-30){
-//      Log.v("ddd", "You're looking right ");
-//      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-//    }
-//    if(data>30){
-//      Log.v("ddd", "You're looking left ");
-//      Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//      v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-//    }
-
     if ((left == Face.UNCOMPUTED_PROBABILITY) ||
             (right == Face.UNCOMPUTED_PROBABILITY)) {
       // One of the eyes was not detected.
@@ -393,11 +444,9 @@ public final class LivePreviewActivity extends AppCompatActivity
         break;
     }
 
-
-
     value = Math.min(left, right);
-    ms.setText(""+value);
-    blink.setText(""+time+"ms");
+    ms.setText("ratio: "+value);//
+    blink.setText(""+time+"ms");//set millisecond value to textview
 
   }
 
@@ -405,6 +454,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   @Override
   protected void onPause() {
     super.onPause();
+    Log.d(TAG, "onPause");
+    wasRunning = running;
+    running = false;
     preview.stop();
   }
 
@@ -414,6 +466,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     if (cameraSource != null) {
       cameraSource.release();
     }
+    Log.d(TAG, "onDestroy");
   }
 
   private String[] getRequiredPermissions() {
@@ -475,13 +528,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     return false;
   }
 
-  private TextView cdText, blink, ms;
-  private Button cdBtn;
-  private CountDownTimer countDownTimer;
-  private long timerLeftInMilisec = 30;
-  long intervalSeconds = 1;
-  long timeDown=0;
-  private boolean timerRunning = false;
+
 
   public void startStop(){
     if (timerRunning==false){
@@ -531,11 +578,93 @@ public final class LivePreviewActivity extends AppCompatActivity
       blinkCount=0;
     }
     timeLeftText+=seconds;
-    cdText.setText(timeLeftText);
+//    cdText.setText(timeLeftText);
   }
 
   public void dataFromFm(double lat, double lng, String address, String city,String zip, String state, String country) {
 
     Log.d("Address", lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country);
+  }
+
+  private void runTimer()
+  {
+
+    // Get the text view.
+    final TextView timeView
+            = (TextView)findViewById(
+            R.id.countdown_text);
+
+    // Creates a new Handler
+    final Handler handler
+            = new Handler();
+
+    // Call the post() method,
+    // passing in a new Runnable.
+    // The post() method processes
+    // code without a delay,
+    // so the code in the Runnable
+    // will run almost immediately.
+    handler.post(new Runnable() {
+      @Override
+
+      public void run()
+      {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+
+        // Format the seconds into hours, minutes,
+        // and seconds.
+        String time
+                = String
+                .format(Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs);
+
+        // Set the text view text.
+        timeView.setText(time);
+
+        // If running is true, increment the
+        // seconds variable.
+        if (running) {
+          seconds++;
+        }
+
+        // Post the code again
+        // with a delay of 1 second.
+        handler.postDelayed(this, 1000);
+      }
+    });
+  }
+
+  @Override
+  protected void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState
+            .putInt("seconds", seconds);
+    outState
+            .putBoolean("running", running);
+    outState
+            .putBoolean("wasRunning", wasRunning);
+  }
+
+  @Override
+  public void onBackPressed() {
+    new AlertDialog.Builder(LivePreviewActivity.this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Quiting App?")
+            .setMessage("Are you sure to exit?")
+            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+
+                //Stop the activity
+                finish();
+              }
+
+            })
+            .setNegativeButton(R.string.no, null)
+            .show();
   }
 }
