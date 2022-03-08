@@ -143,7 +143,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha01"
-    implementation "android.arch.navigation:navigation-ui:1.0.0-alpha01"
+    implementation "android.arch.navigation:navigation-ui:1.0.0"
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
 
 configurations {

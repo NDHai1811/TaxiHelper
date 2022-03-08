@@ -3,6 +3,7 @@ package com.google.mlkit.vision.demo.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,10 @@ import android.widget.TextView;
 import com.google.android.material.transition.MaterialFadeThrough;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.ViewDialog;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
+import com.google.mlkit.vision.demo.note;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
+import com.google.mlkit.vision.demo.trafficsign;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,12 +72,26 @@ public class Fragment_Setting extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_setting,container,false);
-        TextView button = view.findViewById(R.id.textView3);
-        button.setOnClickListener(v -> {
+        CardView button = view.findViewById(R.id.card1);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), trafficsign.class);
+                startActivity(intent);
+            }
+        });
 
-
-//            ViewDialog alert = new ViewDialog();
-//            alert.showDialog(getActivity(), "Sleep Alert!!!");
+        CardView button2 = view.findViewById(R.id.tips);
+        button2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), note.class);
+                startActivity(intent);
+            }
         });
         // Inflate the layout for this fragment
         return view;

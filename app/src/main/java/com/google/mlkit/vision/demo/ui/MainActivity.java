@@ -1,23 +1,20 @@
 package com.google.mlkit.vision.demo.ui;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.Window;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.Window;
-
-import com.google.android.gms.common.api.internal.IStatusCallback;
-import com.google.android.gms.dynamic.SupportFragmentWrapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.mlkit.vision.demo.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     public int count=0;
     public int your_pos=0;
     BottomNavigationView navigation;
+    List<Integer> state = new ArrayList<>();
+    boolean pressed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,35 +33,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 count++;
+                    if (!pressed==true){
+                        state.add(item.getItemId());
+                        pressed=false;
+                    }
+
+                Log.d("TAG", "add state: "+state.toString());
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        your_pos=0;
+                        your_pos=R.id.navigation_home;
                         fragment=new Fragment_Home();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_notify:
-                        your_pos=1;
+                        your_pos=R.id.navigation_notify;
                         fragment=new Fragment_Notify();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_setting:
-                        your_pos=2;
-                        fragment=new SettingsFragment2();
+                        your_pos=R.id.navigation_setting;
+                        fragment=new Fragment_Setting();
                         Fragment_load(fragment);
                         return true;
                     case R.id.navigation_profile:
-                        your_pos=3;
+                        your_pos=R.id.navigation_profile;
                         fragment=new Fragment_Profile();
                         Fragment_load(fragment);
                         return true;
                 }
+
                 return false;
             }
 
@@ -80,12 +85,11 @@ public class MainActivity extends AppCompatActivity {
             public void onBackStackChanged() {
                 if( getSupportFragmentManager().getBackStackEntryCount() <= count) {
                     Log.d("Frag", "onBackStackChanged: "+your_pos);
-                    //check your position based on selected fragment and set it accordingly.
-                    navigation.getMenu().getItem(your_pos);
                 }
             }
         });
         ///////////////////////////////////////////////////////////
+        state.add(R.id.navigation_home);
         Fragment_load(new Fragment_Home());
         ///////////////////////////////////////////////////////////
     }
@@ -103,24 +107,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            getSupportFragmentManager().popBackStack();
-            Fragment selectedFragment = null;
-            List<Fragment> fragments = getSupportFragmentManager().getFragments();
-            for (Fragment fragment : fragments) {
-                if (fragment != null && fragment.isVisible()) {
-                    selectedFragment = fragment;
-                    break;
-                }
-            }
-            if (!(selectedFragment instanceof Fragment_Home)) {
-                navigation.setSelectedItemId(R.id.navigation_home);
-            } else {
-                super.onBackPressed();
-            }
+        super.onBackPressed();
+        pressed=true;
+        if (state.size()>1){
+            state.remove(state.size()-1);
+            navigation.setSelectedItemId(state.get(state.size()-1));
+        }else if (state.size()==1){
+            finish();
+        }super.onBackPressed();
+        Log.d("TAG", "remove state: "+state.toString());
 
-        } else {
-            super.onBackPressed();
-        }
     }
 }

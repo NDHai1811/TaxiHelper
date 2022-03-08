@@ -118,6 +118,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/tips"
                     android:layout_width="10dp"
                     android:layout_height="110dp"
                     android:layout_margin="10dp"
