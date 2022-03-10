@@ -2,6 +2,7 @@ package com.google.mlkit.vision.demo.map;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -52,6 +53,21 @@ public class MapsFragment extends Fragment {
     StringBuilder sb;
     int count=0;
 
+    public interface onSomeEventListener {
+        public void someEvent(String s);
+    }
+    onSomeEventListener someEventListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            someEventListener = (onSomeEventListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+        }
+    }
+
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -75,7 +91,7 @@ public class MapsFragment extends Fragment {
 
             mLocationRequest = new LocationRequest();
             mLocationRequest.setInterval(60000); // two minute interval
-            mLocationRequest.setFastestInterval(30000);
+            mLocationRequest.setFastestInterval(10000);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -137,6 +153,9 @@ public class MapsFragment extends Fragment {
                                     addresses.get(0).getPostalCode(),
                                     addresses.get(0).getAdminArea(),
                                     addresses.get(0).getCountryName());
+                            String dataAddress =
+                                    address.getAddressLine(0);
+                            someEventListener.someEvent(dataAddress);
                         }
                         Log.d("TAG",""+ sb);
 

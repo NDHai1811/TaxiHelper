@@ -16,16 +16,20 @@
 
 package com.google.mlkit.vision.demo.java;
 
+import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +46,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.AnimRes;
+import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +57,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.android.gms.vision.face.Face;
@@ -63,19 +72,31 @@ import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
 import com.google.mlkit.vision.demo.map.MapsFragment;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
+import com.google.mlkit.vision.demo.realtime_data.DataInfo;
+import com.google.mlkit.vision.demo.realtime_data.DataInfo_Adapter;
+import com.google.mlkit.vision.demo.traffic_sign.CourseAdapter;
+import com.google.mlkit.vision.demo.traffic_sign.CourseModal;
+import com.google.mlkit.vision.demo.traffic_sign.TrafficSign;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /** Live preview demo for ML Kit APIs. */
 @KeepName
 public final class LivePreviewActivity extends AppCompatActivity
     implements OnRequestPermissionsResultCallback,
         OnItemSelectedListener,
-        CompoundButton.OnCheckedChangeListener {
+        CompoundButton.OnCheckedChangeListener, MapsFragment.onSomeEventListener {
   private static final String FACE_DETECTION = "Face Detection";
 
   private static final String TAG = "LivePreviewActivity";
@@ -91,6 +112,13 @@ public final class LivePreviewActivity extends AppCompatActivity
   int delay = 10;
   FragmentManager fm;
   AlertCalculate alertCalculate;
+
+  private RecyclerView cities;
+  private RecyclerView.Adapter adapter;
+  private ArrayList<DataInfo> courseModalArrayList;
+  ArrayList<DataInfo> list = new ArrayList<>();
+  ArrayList<DataInfo> citiess;
+  private Button button;
 
   Switch mySwitch;
   boolean isOut;
@@ -116,7 +144,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   private int seconds = 0;
   private boolean running;
   private boolean wasRunning;
-
+  private Handler handler2 = new Handler();
+  private Runnable runnable2;
+  int delay2=5000;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +159,36 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_vision_live_preview);
+
+    citiess = readCSVData();
+
+    this.cities = (RecyclerView) findViewById(R.id.rtInfo);
+    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+    this.cities.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+    this.cities.setLayoutManager(mLayoutManager);
+
+    adapter = new DataInfo_Adapter(citiess, this);
+    this.cities.setAdapter(adapter);
+    button = findViewById(R.id.button);
+    button.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        String datetime = Calendar.getInstance().getTime().toString();
+        list.add(0, new DataInfo("Bạn đang ở: "+dataAddress, "Thời điểm: "+datetime, "Phát hiện mất tập trung:?"));
+        adapter.notifyItemInserted(0);
+        cities.smoothScrollToPosition(0);
+        Log.d("run", "onClick: "+dataAddress);
+      }
+    });
+
+    handler2.postDelayed(runnable2 = new Runnable() {
+      public void run() {
+        handler2.postDelayed(runnable2, delay2);
+        button.performClick();
+        Log.d("run", "run: success");
+      }
+    }, delay2);
+
     running = true;
     if (savedInstanceState != null) {
 
@@ -229,6 +289,15 @@ public final class LivePreviewActivity extends AppCompatActivity
 
 //    create map fragment
     FragmentTransaction ft_add = fm.beginTransaction();
+
+    int orientation = getResources().getConfiguration().orientation;
+    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+      ft_add.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+
+    } else {
+      ft_add.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+    }
+
     ft_add.add(R.id.frame_layout, new MapsFragment(), "fragment1");
     ft_add.commit();
 
@@ -246,11 +315,22 @@ public final class LivePreviewActivity extends AppCompatActivity
         if (b) {
           Fragment fragment = fm.findFragmentById(R.id.frame_layout);
           FragmentTransaction ft_remo = fm.beginTransaction();
+          if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ft_remo.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+          } else {
+            ft_remo.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+          }
           ft_remo.hide(fragment);
           ft_remo.commit();
         } else {
           Fragment fragment = fm.findFragmentById(R.id.frame_layout);
           FragmentTransaction ft_remo = fm.beginTransaction();
+          if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ft_remo.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+
+          } else {
+            ft_remo.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+          }
           ft_remo.show(fragment);
           ft_remo.commit();
         }
@@ -581,9 +661,16 @@ public final class LivePreviewActivity extends AppCompatActivity
 //    cdText.setText(timeLeftText);
   }
 
+  public String dataAddress;
   public void dataFromFm(double lat, double lng, String address, String city,String zip, String state, String country) {
 
     Log.d("Address", lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country);
+//    this.dataAddress = "Address" + lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country;
+
+
+//    list.add(1, new DataInfo("Adu", "Adu", "Adu"));
+//    adapter.notifyItemInserted(1);
+
   }
 
   private void runTimer()
@@ -666,5 +753,18 @@ public final class LivePreviewActivity extends AppCompatActivity
             })
             .setNegativeButton(R.string.no, null)
             .show();
+  }
+
+  private List<TrafficSign> trafficSign = new ArrayList<>();
+  private ArrayList<DataInfo> readCSVData() {
+    String datetime1 = Calendar.getInstance().getTime().toString();
+//    list.add(new DataInfo("Bắt đầu tại"+dataAddress, "Thời điểm"+datetime1, ""));
+    return list;
+  }
+
+  @Override
+  public void someEvent(String s) {
+    dataAddress = s;
+    Log.d("Data", "data from fragment "+s);
   }
 }

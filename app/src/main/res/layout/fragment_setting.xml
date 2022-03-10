@@ -21,6 +21,7 @@
             android:background="@drawable/ctr_bg"
             android:fitsSystemWindows="true"
             app:expandedTitleTextColor="@color/white"
+            app:collapsedTitleTextColor="@color/white"
             app:contentScrim="@color/blue1"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="Tra cứu thông tin">

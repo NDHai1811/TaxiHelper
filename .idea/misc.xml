@@ -10,7 +10,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/activity_note.xml" value="0.1" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/activity_settings.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/activity_trafficsign.xml" value="0.1" />
-        <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/activity_vision_live_preview.xml" value="0.264" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/activity_vision_live_preview.xml" value="0.176" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/course_rv_item.xml" value="0.1" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/dialog.xml" value="0.18704710144927536" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/fragment__anasayfa.xml" value="0.136" />
@@ -20,6 +20,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/fragment_profile.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/fragment_setting.xml" value="0.20018115942028986" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/realtime_info.xml" value="0.4" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/settings_activity.xml" value="0.1" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/settings_style.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/layout/splashscreen.xml" value="0.1171875" />
