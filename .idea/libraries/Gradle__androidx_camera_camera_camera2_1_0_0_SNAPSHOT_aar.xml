@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/annotations.zip!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/annotations.zip!/" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/NCKH/AndroidApp/examples/lite/examples/image_classification/android/caches/transforms-2/files-2.1/c89063bd02c90cca1ba302f6346f8268/jetified-camera-camera2-1.0.0-SNAPSHOT/jars/classes.jar!/" />
@@ -19,12 +20,15 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://C:/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/AndroidManifest.xml" />
+      <root url="file://C:/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/res" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/9257442c80c916b91adaff9b0d3a7a65/jetified-camera-camera2-1.0.0-SNAPSHOT/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/androidx.camera/camera-camera2/1.0.0-SNAPSHOT/25b327568c8abf5e4715f0ba8478ca206d90086c/camera-camera2-1.0.0-SNAPSHOT-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/androidx.camera/camera-camera2/1.0.0-SNAPSHOT/25b327568c8abf5e4715f0ba8478ca206d90086c/camera-camera2-1.0.0-SNAPSHOT-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.camera/camera-camera2/1.0.0-SNAPSHOT/25b327568c8abf5e4715f0ba8478ca206d90086c/camera-camera2-1.0.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://C:/caches/modules-2/files-2.1/androidx.camera/camera-camera2/1.0.0-SNAPSHOT/25b327568c8abf5e4715f0ba8478ca206d90086c/camera-camera2-1.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

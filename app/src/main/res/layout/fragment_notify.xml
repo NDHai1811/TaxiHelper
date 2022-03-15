@@ -16,8 +16,9 @@
         android:gravity="center"
         android:text="Không có thông báo"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="30sp"
+
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +27,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="269dp"
-        android:layout_height="263dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"

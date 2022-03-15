@@ -27,7 +27,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
-        android:text="TEXTO"
+        android:text="Phát hiện mất tập trung"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
@@ -40,6 +40,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="Bỏ qua"
+        android:background="@drawable/bgbutton"
         android:textColor="@color/black" />
 
 </RelativeLayout>
