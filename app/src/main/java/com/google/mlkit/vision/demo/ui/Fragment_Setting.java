@@ -18,6 +18,7 @@ import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.mlkit.vision.demo.note;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
 import com.google.mlkit.vision.demo.trafficsign;
+import com.google.mlkit.vision.demo.web.WebActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,6 +91,17 @@ public class Fragment_Setting extends Fragment {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getActivity(), note.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView button3 = view.findViewById(R.id.tracuu);
+        button3.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
                 startActivity(intent);
             }
         });

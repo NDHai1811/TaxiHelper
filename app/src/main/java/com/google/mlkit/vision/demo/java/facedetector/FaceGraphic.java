@@ -20,6 +20,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.util.Log;
+
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.GraphicOverlay.Graphic;
 import com.google.mlkit.vision.face.Face;
@@ -98,7 +100,11 @@ public class FaceGraphic extends Graphic {
   public void draw(Canvas canvas) {
     Face face = this.face;
     if (face == null) {
-      return;
+      Log.d("TAG", "onSuccess: no face detected");
+//      return;
+    }
+    else {
+      Log.d("TAG", "onSuccess: has face detected");
     }
 
     // Draws a circle at the position of the detected face, with the face's track id below.

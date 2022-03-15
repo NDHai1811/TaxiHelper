@@ -72,6 +72,9 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
   @Override
   protected void onSuccess(@NonNull List<Face> faces, @NonNull GraphicOverlay graphicOverlay) {
     for (Face face : faces) {
+      if (face != null){
+        Log.d(TAG, "onSuccess: no face detected");
+      }
       graphicOverlay.add(new FaceGraphic(graphicOverlay, face));
       look = face.getHeadEulerAngleY();
       if (face.getLeftEyeOpenProbability() != null || face.getRightEyeOpenProbability() != null){

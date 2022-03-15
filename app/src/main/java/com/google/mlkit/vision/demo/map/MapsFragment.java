@@ -53,6 +53,9 @@ public class MapsFragment extends Fragment {
     StringBuilder sb;
     int count=0;
 
+    double oldLat, oldLog;
+    long speed;
+
     public interface onSomeEventListener {
         public void someEvent(String s);
     }
@@ -90,8 +93,8 @@ public class MapsFragment extends Fragment {
             mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(60000); // two minute interval
-            mLocationRequest.setFastestInterval(10000);
+            mLocationRequest.setInterval(0); // two minute interval
+            mLocationRequest.setFastestInterval(0);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -121,7 +124,13 @@ public class MapsFragment extends Fragment {
                 if (locationList.size() > 0) {
                     //The last location in the list is the newest
                     Location location = locationList.get(locationList.size() - 1);
+                    oldLat = location.getLatitude();
+                    oldLog = location.getLongitude();
                     Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+                    if (oldLog!=location.getLongitude()||oldLat!=location.getLatitude()){
+                        speed = calculateDistance(oldLat, oldLog, location.getLatitude(), location.getLongitude());
+                        Log.d("Speed", "onLocationResult: "+speed);
+                    }
                     mLastLocation = location;
                     if (mCurrLocationMarker != null) {
                         mCurrLocationMarker.remove();
@@ -163,6 +172,7 @@ public class MapsFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
+
             }
         };
 
@@ -231,5 +241,17 @@ public class MapsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+    }
+
+    private static long calculateDistance(double lat1, double lng1, double lat2, double lng2) {
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lng2 - lng1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        long distanceInMeters = Math.round(6371000 * c);
+        return distanceInMeters;
     }
 }

@@ -5,6 +5,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -42,6 +44,9 @@ public class trafficsign extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#02457A"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
         getSupportActionBar().setTitle("Tra cứu biển báo");
         setContentView(R.layout.activity_trafficsign);
 
@@ -104,7 +109,7 @@ public class trafficsign extends AppCompatActivity {
         if (filteredlist.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.
-            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
             // at last we are passing that filtered
             // list to our adapter class.

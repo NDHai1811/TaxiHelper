@@ -12,6 +12,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="exit"
+      app:layout_constraintEnd_toStartOf="@+id/settings_button"
       app:layout_constraintLeft_toLeftOf="@id/preview_view"
       app:layout_constraintTop_toTopOf="@id/preview_view" />
 
@@ -76,35 +77,25 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/countdown_btn"
         app:layout_constraintStart_toEndOf="@+id/facing_switch"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/countdown_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/blinkCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="0ms"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countdown_btn"
+        app:layout_constraintStart_toEndOf="@+id/countdown_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/millisec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:paddingLeft="10dp"
+        android:text="0.0"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/blinkCount"
@@ -137,8 +128,7 @@
       android:id="@+id/switch1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Switch"
-      tools:visibility="gone" />
+      android:visibility="gone"/>
 
   <Button
       android:id="@+id/button"

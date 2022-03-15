@@ -16,7 +16,6 @@
 
 package com.google.mlkit.vision.demo.java;
 
-import static androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -27,10 +26,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -40,14 +36,11 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.annotation.AnimRes;
-import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,7 +50,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,22 +66,19 @@ import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import com.google.mlkit.vision.demo.preference.SettingsActivity;
 import com.google.mlkit.vision.demo.realtime_data.DataInfo;
 import com.google.mlkit.vision.demo.realtime_data.DataInfo_Adapter;
-import com.google.mlkit.vision.demo.traffic_sign.CourseAdapter;
-import com.google.mlkit.vision.demo.traffic_sign.CourseModal;
 import com.google.mlkit.vision.demo.traffic_sign.TrafficSign;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
+import com.example.fancytoastlib.FancyToast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.TimeZone;
 
 /** Live preview demo for ML Kit APIs. */
 @KeepName
@@ -115,25 +104,18 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   private RecyclerView cities;
   private RecyclerView.Adapter adapter;
-  private ArrayList<DataInfo> courseModalArrayList;
   ArrayList<DataInfo> list = new ArrayList<>();
   ArrayList<DataInfo> citiess;
   private Button button;
 
   Switch mySwitch;
   boolean isOut;
-  private TextView cdText, blink, ms;
-  private Button cdBtn;
-  private CountDownTimer countDownTimer;
-  private final long timerLeftInMilisec = 30;
-  long intervalSeconds = 1;
-  long timeDown=0;
+  private TextView blink, ms;
   private boolean timerRunning = false;
   double data;
   float left, right;
   AlertCalculate check = new AlertCalculate(this, this);
   int timeout;
-  int blinkCount=0;
   long start, end, time;
   float value;
   private final float OPEN_THRESHOLD = (float) 0.85;
@@ -146,7 +128,7 @@ public final class LivePreviewActivity extends AppCompatActivity
   private boolean wasRunning;
   private Handler handler2 = new Handler();
   private Runnable runnable2;
-  int delay2=5000;
+  int delay2=10000;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +146,6 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     this.cities = (RecyclerView) findViewById(R.id.rtInfo);
     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-    this.cities.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
     this.cities.setLayoutManager(mLayoutManager);
 
     adapter = new DataInfo_Adapter(citiess, this);
@@ -173,8 +154,15 @@ public final class LivePreviewActivity extends AppCompatActivity
     button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+7:00"));
+        Date currentLocalTime = cal.getTime();
+        DateFormat date = new SimpleDateFormat("HH:mm a");
+// you can get seconds by adding  "...:ss" to it
+        date.setTimeZone(TimeZone.getTimeZone("GMT+7:00"));
+
+        String localTime = date.format(currentLocalTime);
         String datetime = Calendar.getInstance().getTime().toString();
-        list.add(0, new DataInfo("Bạn đang ở: "+dataAddress, "Thời điểm: "+datetime, "Phát hiện mất tập trung:?"));
+        list.add(0, new DataInfo("Bạn đang ở vị trí: "+dataAddress, ""+localTime, "Phát hiện mất tập trung:?"));
         adapter.notifyItemInserted(0);
         cities.smoothScrollToPosition(0);
         Log.d("run", "onClick: "+dataAddress);
@@ -185,7 +173,6 @@ public final class LivePreviewActivity extends AppCompatActivity
       public void run() {
         handler2.postDelayed(runnable2, delay2);
         button.performClick();
-        Log.d("run", "run: success");
       }
     }, delay2);
 
@@ -245,7 +232,6 @@ public final class LivePreviewActivity extends AppCompatActivity
     });
 
 //    cdText = findViewById(R.id.countdown_text);//Countdown Textview
-    cdBtn = findViewById(R.id.countdown_btn);//Countdown button
     blink = findViewById(R.id.blinkCount);//Count blink time
     ms = findViewById(R.id.millisec);//A textview to display millisec
     fm = getSupportFragmentManager();//A fragment manager to control map fragment
@@ -274,16 +260,6 @@ public final class LivePreviewActivity extends AppCompatActivity
                 .show();
       }
     });
-//test countdown timer
-
-    cdBtn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-      }
-    });
-
-    updateTimer();
 
     ToggleButton facingSwitch = findViewById(R.id.facing_switch);
 
@@ -485,6 +461,9 @@ public final class LivePreviewActivity extends AppCompatActivity
 
       mySwitch.setChecked(check.count > 300);
     }
+    else{
+      FancyToast.makeText(this, "Here is some Info for you", FancyToast.LENGTH_LONG, FancyToast.INFO, true).show();
+    }
   }
 
 //check eyes are blinking or not and calculate time of this
@@ -610,58 +589,8 @@ public final class LivePreviewActivity extends AppCompatActivity
 
 
 
-  public void startStop(){
-    if (timerRunning==false){
-      startTimer();
-    }
-    else{
-      stopTimer();
-    }
-  }
 
-  public void startTimer(){
-    countDownTimer = new CountDownTimer(timerLeftInMilisec*1000, intervalSeconds*1000) {
-      @Override
-      public void onTick(long l) {
-//        timerLeftInMilisec = l;
-        timeDown = (timerLeftInMilisec * 1000 - l) / 1000;
-        Log.d("TAG2", "onTick: "+ (timerLeftInMilisec * 1000 - l) / 1000);
-        updateTimer();
-      }
-
-      @Override
-      public void onFinish() {
-        Log.d("TAG2", "onFinish: Time's up");
-      }
-    }.start();
-    cdBtn.setText("PAUSE");
-    timerRunning = true;
-  }
-  public void stopTimer(){
-    countDownTimer.cancel();
-    cdBtn.setText("START");
-    timerRunning = false;
-  }
-
-  public void updateTimer() {
-    int minutes = (int) timerLeftInMilisec/60000;
-    int seconds = (int) timerLeftInMilisec%60000/1000;
-    String timeLeftText;
-
-    timeLeftText = ""+minutes;
-    timeLeftText += ":";
-    if(seconds<10){
-      timeLeftText+="0";
-    }
-
-    if (seconds==0){
-      blinkCount=0;
-    }
-    timeLeftText+=seconds;
-//    cdText.setText(timeLeftText);
-  }
-
-  public String dataAddress;
+  public String dataAddress = "Chưa xác định";
   public void dataFromFm(double lat, double lng, String address, String city,String zip, String state, String country) {
 
     Log.d("Address", lat+" "+lng+" "+address+" "+city+" "+zip+" "+state+" "+country);
@@ -764,7 +693,10 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   @Override
   public void someEvent(String s) {
-    dataAddress = s;
+    if (s !=null){
+      dataAddress = s;
+    }
+    else dataAddress = "Chưa xác định";
     Log.d("Data", "data from fragment "+s);
   }
 }

@@ -43,6 +43,7 @@ import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.InferenceInfoGraphic;
 import com.google.mlkit.vision.demo.ScopedExecutor;
 import com.google.mlkit.vision.demo.VisionImageProcessor;
+import com.google.mlkit.vision.demo.map.Speedo;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import java.nio.ByteBuffer;
 import java.util.Timer;
@@ -248,12 +249,14 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
               if (originalCameraImage != null) {
                 graphicOverlay.add(new CameraImageGraphic(graphicOverlay, originalCameraImage));
               }
+              String s = new Speedo().getSpeed_info();
               graphicOverlay.add(
                   new InferenceInfoGraphic(
                       graphicOverlay,
                       currentFrameLatencyMs,
                       currentDetectorLatencyMs,
-                      shouldShowFps ? framesPerSecond : null));
+                      shouldShowFps ? framesPerSecond : null,
+                          s));
               VisionProcessorBase.this.onSuccess(results, graphicOverlay);
               graphicOverlay.postInvalidate();
             })
