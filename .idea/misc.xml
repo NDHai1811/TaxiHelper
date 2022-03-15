@@ -37,19 +37,33 @@
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/drawable-xxxhdpi/ic_settings.xml" value="0.167" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/drawable/image_shadow.xml" value="0.167" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/drawable/logo_mlkit.xml" value="0.167" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/font/lobster.xml" value="0.2518518518518518" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout-land/activity_vision_live_preview.xml" value="0.2140625" />
-        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout-land/fragment_home.xml" value="0.11770833333333333" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_note.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_settings.xml" value="0.1598731884057971" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_splash.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_test_ui.xml" value="0.18614130434782608" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_trafficsign.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_vision_live_preview.xml" value="0.1598731884057971" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/activity_web.xml" value="0.24547101449275363" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/course_rv_item.xml" value="0.24547101449275363" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/dialog.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment__anasayfa.xml" value="0.2569444444444444" />
-        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_notify.xml" value="0.12360688956433637" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/fragment_setting.xml" value="0.12360688956433637" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/loginnormal.xml" value="0.264" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/realtime_info.xml" value="0.24547101449275363" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/settings_activity.xml" value="0.24547101449275363" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/settings_style.xml" value="0.12360688956433637" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/speed_layout.xml" value="0.24547101449275363" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/splashscreen.xml" value="0.18614130434782608" />
         <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/layout/toggle_style.xml" value="0.12360688956433637" />
+        <entry key="..\:/javaproject/TaxiHelper/app/src/main/res/menu/navigation.xml" value="0.20925925925925926" />
       </map>
     </option>
   </component>
