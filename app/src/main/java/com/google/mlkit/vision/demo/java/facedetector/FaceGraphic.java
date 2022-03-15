@@ -100,11 +100,7 @@ public class FaceGraphic extends Graphic {
   public void draw(Canvas canvas) {
     Face face = this.face;
     if (face == null) {
-      Log.d("TAG", "onSuccess: no face detected");
-//      return;
-    }
-    else {
-      Log.d("TAG", "onSuccess: has face detected");
+      return;
     }
 
     // Draws a circle at the position of the detected face, with the face's track id below.

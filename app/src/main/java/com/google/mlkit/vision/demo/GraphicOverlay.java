@@ -16,10 +16,13 @@
 
 package com.google.mlkit.vision.demo;
 
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import com.google.common.base.Preconditions;
 import java.util.ArrayList;
@@ -63,6 +66,7 @@ public class GraphicOverlay extends View {
   private float postScaleHeightOffset;
   private boolean isImageFlipped;
   private boolean needUpdateTransformation = true;
+  public boolean smt;
 
   /**
    * Base class for a custom graphics object to be rendered within the graphic overlay. Subclass
@@ -233,7 +237,11 @@ public class GraphicOverlay extends View {
 
       for (Graphic graphic : graphics) {
         graphic.draw(canvas);
+        smt = true;
+        Log.d(TAG, "onDraw: "+smt);
       }
+      smt = false;
+
     }
   }
 }

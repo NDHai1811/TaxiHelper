@@ -447,14 +447,6 @@ public final class LivePreviewActivity extends AppCompatActivity
       Log.v("ddd", "eye " + value);
       sleepDetection();
 
-      if (processor.hasface) {
-        Log.d("TAG", "getData: has face");
-        Log.d("TAG1", "getDataX: " + processor.eulerX);
-        Log.d("TAG1", "getDataY: " + processor.eulerY);
-        Log.d("TAG1", "getDataZ: " + processor.eulerZ);
-      } else {
-        Log.d("TAG", "getData: no face");
-      }
 
       //get time calculated when lose attention
       timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
@@ -462,7 +454,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       mySwitch.setChecked(check.count > 300);
     }
     else{
-      FancyToast.makeText(this, "Here is some Info for you", FancyToast.LENGTH_LONG, FancyToast.INFO, true).show();
+
     }
   }
 
