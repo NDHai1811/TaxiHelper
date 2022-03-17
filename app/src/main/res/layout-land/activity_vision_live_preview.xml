@@ -91,6 +91,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blinkCount" />
 
+    <TextView
+        android:id="@+id/speedTV"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Speed"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/facing_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/millisec" />
+
     <Button
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
@@ -128,11 +139,11 @@
       android:id="@+id/frame_layout"
       android:layout_width="250dp"
       android:layout_height="match_parent"
-      app:layout_constraintEnd_toEndOf="@+id/preview_view"></FrameLayout>
+      app:layout_constraintEnd_toEndOf="@+id/preview_view"/>
   <Switch
       android:id="@+id/switch1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
       android:text="Switch"
       android:visibility="gone"/>
 

@@ -14,7 +14,7 @@ import com.google.android.material.transition.MaterialFadeThrough;
 import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.android.material.transition.MaterialFadeThrough;
-import com.google.mlkit.vision.demo.map.Speedo;
+//import com.google.mlkit.vision.demo.map.Speedo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +97,7 @@ public class Fragment_Home extends Fragment {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getActivity(), Speedo.class);
+                Intent intent = new Intent(getActivity(), TestUi.class);
                 startActivity(intent);
             }
         });

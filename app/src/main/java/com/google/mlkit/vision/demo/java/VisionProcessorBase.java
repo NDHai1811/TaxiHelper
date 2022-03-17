@@ -19,10 +19,12 @@ package com.google.mlkit.vision.demo.java;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
 import androidx.annotation.GuardedBy;
@@ -30,8 +32,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import android.util.Log;
+import android.util.Size;
 import android.widget.Toast;
 import androidx.camera.core.ExperimentalGetImage;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -43,7 +47,6 @@ import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.InferenceInfoGraphic;
 import com.google.mlkit.vision.demo.ScopedExecutor;
 import com.google.mlkit.vision.demo.VisionImageProcessor;
-import com.google.mlkit.vision.demo.map.Speedo;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
 import java.nio.ByteBuffer;
 import java.util.Timer;
@@ -203,6 +206,8 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
       boolean shouldShowFps,
       long frameStartMs) {
     final long detectorStartMs = SystemClock.elapsedRealtime();
+
+
     return detectInImage(image)
         .addOnSuccessListener(
             executor,
@@ -249,7 +254,7 @@ public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
               if (originalCameraImage != null) {
                 graphicOverlay.add(new CameraImageGraphic(graphicOverlay, originalCameraImage));
               }
-              String s = new Speedo().getSpeed_info();
+              String s = "";
               graphicOverlay.add(
                   new InferenceInfoGraphic(
                       graphicOverlay,

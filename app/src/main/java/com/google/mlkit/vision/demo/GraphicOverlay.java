@@ -16,8 +16,6 @@
 
 package com.google.mlkit.vision.demo;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -238,7 +236,7 @@ public class GraphicOverlay extends View {
       for (Graphic graphic : graphics) {
         graphic.draw(canvas);
         smt = true;
-        Log.d(TAG, "onDraw: "+smt);
+        Log.d("TAG", "onDraw: "+smt);
       }
       smt = false;
 

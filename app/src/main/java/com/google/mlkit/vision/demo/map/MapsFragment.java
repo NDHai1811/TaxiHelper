@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -16,6 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,10 +43,11 @@ import com.google.mlkit.vision.demo.R;
 import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements IBaseGpsListener {
 
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
@@ -51,14 +56,40 @@ public class MapsFragment extends Fragment {
     Marker mCurrLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
     StringBuilder sb;
-    int count=0;
+    int count = 0;
 
     double oldLat, oldLog;
     long speed;
 
-    public interface onSomeEventListener {
-        public void someEvent(String s);
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onGpsStatusChanged(int event) {
+
+    }
+
+    public interface onSomeEventListener {
+        public void someEvent(String s, String speed);
+    }
+
     onSomeEventListener someEventListener;
 
     @Override
@@ -93,8 +124,8 @@ public class MapsFragment extends Fragment {
             mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(0); // two minute interval
-            mLocationRequest.setFastestInterval(0);
+            mLocationRequest.setInterval(5000); // two minute interval
+            mLocationRequest.setFastestInterval(5000);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -108,8 +139,7 @@ public class MapsFragment extends Fragment {
                     //Request Location Permission
                     checkLocationPermission();
                 }
-            }
-            else {
+            } else {
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mGoogleMap.setMyLocationEnabled(true);
                 mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -127,9 +157,9 @@ public class MapsFragment extends Fragment {
                     oldLat = location.getLatitude();
                     oldLog = location.getLongitude();
                     Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
-                    if (oldLog!=location.getLongitude()||oldLat!=location.getLatitude()){
+                    if (oldLog != location.getLongitude() || oldLat != location.getLatitude()) {
                         speed = calculateDistance(oldLat, oldLog, location.getLatitude(), location.getLongitude());
-                        Log.d("Speed", "onLocationResult: "+speed);
+                        Log.d("Speed", "onLocationResult: " + speed);
                     }
                     mLastLocation = location;
                     if (mCurrLocationMarker != null) {
@@ -145,15 +175,13 @@ public class MapsFragment extends Fragment {
 
                     try {
                         count++;
-                        Log.d("Test", "onLocationResult: They are used "+count+" times");
+                        Log.d("Test", "onLocationResult: They are used " + count + " times");
                         Geocoder geocoder = new Geocoder(thiscontext, Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                         sb = new StringBuilder();
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
                             sb.append(address.getAddressLine(0));
-                            Bundle bundle = new Bundle();
-                            bundle.putString("params", "My String data");
                             LivePreviewActivity activity = new LivePreviewActivity();
                             activity.dataFromFm(latLng.latitude,
                                     latLng.longitude,
@@ -164,9 +192,9 @@ public class MapsFragment extends Fragment {
                                     addresses.get(0).getCountryName());
                             String dataAddress =
                                     address.getAddressLine(0);
-                            someEventListener.someEvent(dataAddress);
+                            someEventListener.someEvent(dataAddress, strCurrentSpeed);
                         }
-                        Log.d("TAG",""+ sb);
+                        Log.d("TAG", "" + sb);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -177,6 +205,7 @@ public class MapsFragment extends Fragment {
         };
 
         public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
         private void checkLocationPermission() {
             if (ContextCompat.checkSelfPermission(thiscontext, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -197,7 +226,7 @@ public class MapsFragment extends Fragment {
                                     //Prompt the user once explanation has been shown
                                     ActivityCompat.requestPermissions(getActivity(),
                                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                            MY_PERMISSIONS_REQUEST_LOCATION );
+                                            MY_PERMISSIONS_REQUEST_LOCATION);
                                 }
                             })
                             .create()
@@ -208,12 +237,13 @@ public class MapsFragment extends Fragment {
                     // No explanation needed, we can request the permission.
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_LOCATION );
+                            MY_PERMISSIONS_REQUEST_LOCATION);
                 }
             }
         }
     };
     private Context thiscontext;
+    String strCurrentSpeed;
 
     @Nullable
     @Override
@@ -224,6 +254,20 @@ public class MapsFragment extends Fragment {
 
         Log.d("Map", "Created");
         thiscontext = container.getContext();
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        this.updateSpeed(null);
+
         return view;
     }
 
@@ -253,5 +297,33 @@ public class MapsFragment extends Fragment {
         double c = 2 * Math.asin(Math.sqrt(a));
         long distanceInMeters = Math.round(6371000 * c);
         return distanceInMeters;
+    }
+
+    private void updateSpeed(CLocation location) {
+        // TODO Auto-generated method stub
+        float nCurrentSpeed = 0;
+
+        if(location != null)
+        {
+            location.setUseMetricunits(this.useMetricUnits());
+            nCurrentSpeed = location.getSpeed();
+        }
+
+        Formatter fmt = new Formatter(new StringBuilder());
+        fmt.format(Locale.US, "%5.1f", nCurrentSpeed);
+        strCurrentSpeed = fmt.toString();
+
+        strCurrentSpeed = strCurrentSpeed.replace(' ', '0');
+
+        String strUnits = "miles/hour";
+        if(this.useMetricUnits())
+        {
+            strUnits = "meters/second";
+        }
+
+    }
+    private boolean useMetricUnits() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

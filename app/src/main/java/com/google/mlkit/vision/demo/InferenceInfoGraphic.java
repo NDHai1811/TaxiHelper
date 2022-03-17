@@ -91,8 +91,6 @@ public class InferenceInfoGraphic extends GraphicOverlay.Graphic {
       canvas.drawText("Frame latency: " + frameLatency + " ms", x, y + TEXT_SIZE, stkPaint);
 
     }
-    canvas.drawText(
-            "Speed: " + speed + " miles/hours", x, y + TEXT_SIZE * 3, stkPaint);
 
 
     //Draw text
@@ -115,8 +113,6 @@ public class InferenceInfoGraphic extends GraphicOverlay.Graphic {
       canvas.drawText("Frame latency: " + frameLatency + " ms", x, y + TEXT_SIZE, textPaint);
 
     }
-    canvas.drawText(
-            "Speed: " + speed + " miles/hours", x, y + TEXT_SIZE * 3, textPaint);
 
   }
 }

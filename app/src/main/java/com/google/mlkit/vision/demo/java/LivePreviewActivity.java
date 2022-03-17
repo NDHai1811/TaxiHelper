@@ -110,7 +110,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   Switch mySwitch;
   boolean isOut;
-  private TextView blink, ms;
+  private TextView blink, ms, speed_stats;
   private boolean timerRunning = false;
   double data;
   float left, right;
@@ -148,6 +148,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
     this.cities.setLayoutManager(mLayoutManager);
 
+    speed_stats = findViewById(R.id.speedTV);
     adapter = new DataInfo_Adapter(citiess, this);
     this.cities.setAdapter(adapter);
     button = findViewById(R.id.button);
@@ -684,11 +685,13 @@ public final class LivePreviewActivity extends AppCompatActivity
   }
 
   @Override
-  public void someEvent(String s) {
+  public void someEvent(String s, String speed) {
     if (s !=null){
       dataAddress = s;
     }
+
     else dataAddress = "Chưa xác định";
+    speed_stats.setText("Speed: "+speed);
     Log.d("Data", "data from fragment "+s);
   }
 }

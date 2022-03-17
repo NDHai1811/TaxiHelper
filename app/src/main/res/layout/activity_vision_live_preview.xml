@@ -101,6 +101,17 @@
         app:layout_constraintStart_toEndOf="@+id/blinkCount"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/speedTV"
+        android:layout_width="112dp"
+        android:layout_height="38dp"
+        android:gravity="center_vertical"
+        android:text="Speed"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 
