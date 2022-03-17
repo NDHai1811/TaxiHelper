@@ -17,12 +17,15 @@
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/res" />
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/jars/classes.jar!/" />
+      <root url="file://C:/caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/res" />
+      <root url="file://C:/caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/AndroidManifest.xml" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/a6f704c3c45c4c4c152ab090a49b58a4/jetified-mediapipe-internal-16.1.0-beta1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/16.1.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-16.1.0-beta1-javadoc.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/16.1.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-16.1.0-beta1-javadoc.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/16.1.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-16.1.0-beta1-javadoc.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/16.1.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-16.1.0-beta1-javadoc.jar!/" />
+      <root url="jar://C:/caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/16.1.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-16.1.0-beta1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>

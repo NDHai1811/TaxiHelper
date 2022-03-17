@@ -53,7 +53,7 @@
             android:text="D.A.W.N"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:fontFamily="@font/Lobster"
+            android:fontFamily="@font/lobster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -16,13 +16,16 @@
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/res" />
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://C:/caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/res" />
+      <root url="file://C:/caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/AndroidManifest.xml" />
+      <root url="jar://C:/caches/transforms-2/files-2.1/cfad5a51d29d70428d548f5bc0aa6ea2/jetified-camera-view-1.0.0-SNAPSHOT/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/androidx.camera/camera-view/1.0.0-SNAPSHOT/aaecbd1f998e1639295c2eeeb0fa8a2d2de7d874/camera-view-1.0.0-SNAPSHOT-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/androidx.camera/camera-view/1.0.0-SNAPSHOT/aaecbd1f998e1639295c2eeeb0fa8a2d2de7d874/camera-view-1.0.0-SNAPSHOT-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/androidx.camera/camera-view/1.0.0-SNAPSHOT/aaecbd1f998e1639295c2eeeb0fa8a2d2de7d874/camera-view-1.0.0-SNAPSHOT-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.camera/camera-view/1.0.0-SNAPSHOT/aaecbd1f998e1639295c2eeeb0fa8a2d2de7d874/camera-view-1.0.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://C:/caches/modules-2/files-2.1/androidx.camera/camera-view/1.0.0-SNAPSHOT/aaecbd1f998e1639295c2eeeb0fa8a2d2de7d874/camera-view-1.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
