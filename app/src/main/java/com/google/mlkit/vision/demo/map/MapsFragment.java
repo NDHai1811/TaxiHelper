@@ -58,8 +58,6 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
     StringBuilder sb;
     int count = 0;
 
-    double oldLat, oldLog;
-    long speed;
 
     @Override
     public void onLocationChanged(Location location) {
@@ -154,13 +152,8 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
                 if (locationList.size() > 0) {
                     //The last location in the list is the newest
                     Location location = locationList.get(locationList.size() - 1);
-                    oldLat = location.getLatitude();
-                    oldLog = location.getLongitude();
                     Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
-                    if (oldLog != location.getLongitude() || oldLat != location.getLatitude()) {
-                        speed = calculateDistance(oldLat, oldLog, location.getLatitude(), location.getLongitude());
-                        Log.d("Speed", "onLocationResult: " + speed);
-                    }
+
                     mLastLocation = location;
                     if (mCurrLocationMarker != null) {
                         mCurrLocationMarker.remove();
@@ -287,17 +280,6 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
         super.onAttach(context);
     }
 
-    private static long calculateDistance(double lat1, double lng1, double lat2, double lng2) {
-        double dLat = Math.toRadians(lat2 - lat1);
-        double dLon = Math.toRadians(lng2 - lng1);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-                + Math.cos(Math.toRadians(lat1))
-                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
-                * Math.sin(dLon / 2);
-        double c = 2 * Math.asin(Math.sqrt(a));
-        long distanceInMeters = Math.round(6371000 * c);
-        return distanceInMeters;
-    }
 
     private void updateSpeed(CLocation location) {
         // TODO Auto-generated method stub
