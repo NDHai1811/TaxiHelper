@@ -99,8 +99,8 @@
         <activity
             android:name=".preference.SettingsActivity"
             android:exported="false" />
-<!--        <activity android:name=".map.Speedo"-->
-<!--            android:exported="true"/>-->
+        <activity android:name=".map.Speedo"
+            android:exported="true"/>
     </application>
 
 </manifest>

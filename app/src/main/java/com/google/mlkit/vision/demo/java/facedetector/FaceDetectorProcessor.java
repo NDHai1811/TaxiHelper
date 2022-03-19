@@ -39,7 +39,7 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
   private static final String TAG = "FaceDetectorProcessor";
 
   private final FaceDetector detector;
-  public double look;
+  public double headDirection;
   public float left, right, eulerX, eulerY, eulerZ;
   public boolean hasface = false;
 
@@ -76,7 +76,7 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
         return;
       }
       graphicOverlay.add(new FaceGraphic(graphicOverlay, face));
-      look = face.getHeadEulerAngleY();
+      headDirection = face.getHeadEulerAngleY();
       if (face.getLeftEyeOpenProbability() != null || face.getRightEyeOpenProbability() != null){
         left = face.getLeftEyeOpenProbability();
         right = face.getRightEyeOpenProbability();

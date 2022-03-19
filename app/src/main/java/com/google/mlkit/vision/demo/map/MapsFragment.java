@@ -17,9 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -175,14 +172,14 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
                             sb.append(address.getAddressLine(0));
-                            LivePreviewActivity activity = new LivePreviewActivity();
-                            activity.dataFromFm(latLng.latitude,
-                                    latLng.longitude,
-                                    address.getAddressLine(0),
-                                    addresses.get(0).getLocality(),
-                                    addresses.get(0).getPostalCode(),
-                                    addresses.get(0).getAdminArea(),
-                                    addresses.get(0).getCountryName());
+//                            LivePreviewActivity activity = new LivePreviewActivity();
+//                            activity.dataFromFm(latLng.latitude,
+//                                    latLng.longitude,
+//                                    address.getAddressLine(0),
+//                                    addresses.get(0).getLocality(),
+//                                    addresses.get(0).getPostalCode(),
+//                                    addresses.get(0).getAdminArea(),
+//                                    addresses.get(0).getCountryName());
                             String dataAddress =
                                     address.getAddressLine(0);
                             someEventListener.someEvent(dataAddress, strCurrentSpeed);
@@ -237,6 +234,7 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
     };
     private Context thiscontext;
     String strCurrentSpeed;
+    LocationManager locationManager;
 
     @Nullable
     @Override
@@ -247,7 +245,7 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
 
         Log.d("Map", "Created");
         thiscontext = container.getContext();
-        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -308,4 +306,22 @@ public class MapsFragment extends Fragment implements IBaseGpsListener {
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public void onDestroyView() {
+        // TODO Auto-generated method stub
+        super.onDestroyView();
+
+        locationManager.removeUpdates(this);
+
+        android.app.Fragment fragment = getActivity().getFragmentManager()
+                .findFragmentById(R.id.frame_layout);
+        if (null != fragment) {
+            android.app.FragmentTransaction ft = getActivity()
+                    .getFragmentManager().beginTransaction();
+            ft.remove(fragment);
+            ft.commit();
+        }
+    }
+
 }

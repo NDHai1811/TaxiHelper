@@ -224,7 +224,7 @@ public class FaceGraphic extends Graphic {
           translateY(leftEye.getPosition().y) + ID_Y_OFFSET + BOX_STROKE_WIDTH,
           labelPaints[colorID]);
       canvas.drawText(
-          "Left Eye",
+          "Right Eye",
           leftEyeLeft,
           translateY(leftEye.getPosition().y) + ID_Y_OFFSET,
           idPaints[colorID]);
@@ -248,7 +248,7 @@ public class FaceGraphic extends Graphic {
           translateY(rightEye.getPosition().y) + ID_Y_OFFSET + BOX_STROKE_WIDTH,
           labelPaints[colorID]);
       canvas.drawText(
-          "Right Eye",
+          "Left Eye",
           rightEyeLeft,
           translateY(rightEye.getPosition().y) + ID_Y_OFFSET,
           idPaints[colorID]);

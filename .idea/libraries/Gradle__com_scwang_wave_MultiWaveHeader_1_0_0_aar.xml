@@ -13,21 +13,23 @@
       <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/res" />
       <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/AndroidManifest.xml" />
-      <root url="jar://C:/caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/jars/classes.jar!/" />
-      <root url="file://C:/caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/res" />
-      <root url="file://C:/caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../../../../caches/transforms-2/files-2.1/1b2914e0ce5726ae27917b97a94acd4b/jetified-MultiWaveHeader-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
-      <root url="jar://C:/caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/16f6fee245c4cab00cb72a056be63dfc12e2c727/MultiWaveHeader-1.0.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
-      <root url="jar://C:/caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.wave/MultiWaveHeader/1.0.0/c4d3889c9161637431522f8d265909e4d7eef16c/MultiWaveHeader-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

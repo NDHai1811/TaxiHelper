@@ -53,7 +53,6 @@ public class AlertCalculate {
             case 0:
                 if ((x > -20 && x<25) && (y > -20 && y<20)) {
                     // Head is in of detect range
-                    Log.d("Head", "In range instability");
                     state = 1;
                 }
                 break;
@@ -61,7 +60,6 @@ public class AlertCalculate {
             case 1:
                 if (x<-20 || y<-20 || x>25 || y>20) {
                     // Head is out of detect range
-                    Log.d("Head", "Out of range");
                     start = System.nanoTime();
                     state = 2;
 //                    startVibrate();
@@ -70,8 +68,6 @@ public class AlertCalculate {
 
             case 2:
                 if ((x > -20 && x<25) && (y > -20 && y<20)) {
-                    // Head is back in of detect range
-                    Log.d("Head", "In range");
                     end = System.nanoTime();
                     time = (int)((end - start) / 1000000);
                     state = 0;
@@ -83,7 +79,6 @@ public class AlertCalculate {
         if(x<-20 || y<-20 || x>25 || y>20){
             count++;
         }
-        Log.d("TAG3", "checkHead: "+count);
         return state;
     }
 

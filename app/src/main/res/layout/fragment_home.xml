@@ -10,7 +10,7 @@
     <com.scwang.wave.MultiWaveHeader
         android:id="@+id/waveHeader"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,28 +24,23 @@
         android:id="@+id/layoutheader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="650dp"
-
-        android:padding="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/texthello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_width="176dp"
+            android:layout_height="60dp"
+            android:fontFamily="@font/lobster"
+            android:gravity="center"
             android:text="D.A.W.N"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:fontFamily="@font/lobster"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -54,7 +49,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="175dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,10 +63,10 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
 
             <RelativeLayout
@@ -110,10 +105,10 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:id="@+id/hdsd"
@@ -162,10 +157,10 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -200,10 +195,10 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp"
+            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -239,43 +234,43 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/facebook"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/instagram"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="92dp"
         android:layout_marginEnd="68dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/discord"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="Liên hệ với chúng tôi"
         android:textColor="@color/black"
         android:textSize="30sp"

@@ -24,7 +24,7 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@id/control"
-      android:layout_width="100dp"
+      android:layout_width="wrap_content"
       android:layout_height="match_parent"
       app:layout_constraintEnd_toEndOf="parent"
       android:background="#000">
@@ -32,8 +32,8 @@
 
     <ToggleButton
         android:id="@+id/facing_switch"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|start"
         android:background="@layout/toggle_style"
         android:checked="false"
@@ -59,55 +59,22 @@
         android:id="@+id/countdown_text"
         android:layout_width="89dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="10:00"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/exitBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/blinkCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="0ms"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countdown_text" />
-
-    <TextView
-        android:id="@+id/millisec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:text="0.0"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blinkCount" />
-
-    <TextView
-        android:id="@+id/speedTV"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:text="Speed"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/facing_switch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/millisec" />
+        app:layout_constraintTop_toBottomOf="@id/exitBtn" />
 
     <Button
         android:id="@+id/exitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="exit"
-        app:layout_constraintBottom_toTopOf="@+id/countdown_text"
+        android:text="Thoát"
+        app:layout_constraintBottom_toTopOf="@+id/facing_switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_button" />
@@ -139,7 +106,8 @@
       android:id="@+id/frame_layout"
       android:layout_width="250dp"
       android:layout_height="match_parent"
-      app:layout_constraintEnd_toEndOf="@+id/preview_view"/>
+      android:background="@color/gray"
+      app:layout_constraintEnd_toEndOf="@+id/preview_view" />
   <Switch
       android:id="@+id/switch1"
       android:layout_width="0dp"

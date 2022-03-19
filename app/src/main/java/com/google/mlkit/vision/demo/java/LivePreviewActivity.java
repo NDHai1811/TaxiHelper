@@ -129,6 +129,8 @@ public final class LivePreviewActivity extends AppCompatActivity
   private Handler handler2 = new Handler();
   private Runnable runnable2;
   int delay2=10000;
+  private int blinkTime;
+  private boolean isWake;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +140,6 @@ public final class LivePreviewActivity extends AppCompatActivity
     getSupportActionBar().hide();
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_vision_live_preview);
 
@@ -148,7 +149,6 @@ public final class LivePreviewActivity extends AppCompatActivity
     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
     this.cities.setLayoutManager(mLayoutManager);
 
-    speed_stats = findViewById(R.id.speedTV);
     adapter = new DataInfo_Adapter(citiess, this);
     this.cities.setAdapter(adapter);
     button = findViewById(R.id.button);
@@ -166,7 +166,6 @@ public final class LivePreviewActivity extends AppCompatActivity
         list.add(0, new DataInfo("Bạn đang ở vị trí: "+dataAddress, ""+localTime, "Phát hiện mất tập trung:?"));
         adapter.notifyItemInserted(0);
         cities.smoothScrollToPosition(0);
-        Log.d("run", "onClick: "+dataAddress);
       }
     });
 
@@ -232,9 +231,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       }
     });
 
-//    cdText = findViewById(R.id.countdown_text);//Countdown Textview
-    blink = findViewById(R.id.blinkCount);//Count blink time
-    ms = findViewById(R.id.millisec);//A textview to display millisec
+
     fm = getSupportFragmentManager();//A fragment manager to control map fragment
     alertCalculate = new AlertCalculate(this, this);//Declare a class AlertCalculate to use its method
 
@@ -243,22 +240,7 @@ public final class LivePreviewActivity extends AppCompatActivity
     exitbtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        new AlertDialog.Builder(LivePreviewActivity.this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Quiting App?")
-                .setMessage("Are you sure to exit?")
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-                  @Override
-                  public void onClick(DialogInterface dialog, int which) {
-
-                    //Stop the activity
-                    finish();
-                  }
-
-                })
-                .setNegativeButton(R.string.no, null)
-                .show();
+        exit();
       }
     });
 
@@ -439,8 +421,8 @@ public final class LivePreviewActivity extends AppCompatActivity
 
 //  Get data from FaceProcessor and use it
   public void getData(FaceDetectorProcessor processor) {
-    if (processor.hasface==true) {
-      data = processor.look;
+    if (processor.hasface) {
+      data = processor.headDirection;
       left = processor.left;
       right = processor.right;
 //    Toast.makeText(this, "Here is data"+lOrR, Toast.LENGTH_SHORT).show();
@@ -452,13 +434,11 @@ public final class LivePreviewActivity extends AppCompatActivity
       //get time calculated when lose attention
       timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
 
-      mySwitch.setChecked(check.count > 300);
+      mySwitch.setChecked(check.count > 400);
     }
-    else{
 
-    }
   }
-
+  int blinkCountMs = 0;
 //check eyes are blinking or not and calculate time of this
   public void sleepDetection(){
     if ((left == Face.UNCOMPUTED_PROBABILITY) ||
@@ -497,8 +477,24 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
 
     value = Math.min(left, right);
-    ms.setText("ratio: "+value);//
-    blink.setText(""+time+"ms");//set millisecond value to textview
+//    ms.setText("ratio: "+value);//
+//    blink.setText(""+time+"ms");//set millisecond value to textview
+
+    if(value<0.96f){
+      blinkCountMs++;
+//      Log.d("TAG4", "sleepDetection: "+blinkCountMs);
+
+    }
+    else if(value>0.96f){
+      blinkCountMs=0;
+      isWake = true;
+    }
+    if (blinkCountMs>200){
+
+      Log.d("TAG4", "blink times: "+blinkTime);
+      blinkCountMs=0;
+      blinkTime++;
+    }
 
   }
 
@@ -519,6 +515,8 @@ public final class LivePreviewActivity extends AppCompatActivity
       cameraSource.release();
     }
     Log.d(TAG, "onDestroy");
+    handler.removeCallbacks(runnable);
+    handler2.removeCallbacks(runnable2);
   }
 
   private String[] getRequiredPermissions() {
@@ -659,22 +657,7 @@ public final class LivePreviewActivity extends AppCompatActivity
 
   @Override
   public void onBackPressed() {
-    new AlertDialog.Builder(LivePreviewActivity.this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle("Quiting App?")
-            .setMessage("Are you sure to exit?")
-            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-
-                //Stop the activity
-                finish();
-              }
-
-            })
-            .setNegativeButton(R.string.no, null)
-            .show();
+    exit();
   }
 
   private List<TrafficSign> trafficSign = new ArrayList<>();
@@ -691,7 +674,28 @@ public final class LivePreviewActivity extends AppCompatActivity
     }
 
     else dataAddress = "Chưa xác định";
-    speed_stats.setText("Speed: "+speed);
+//    speed_stats.setText("Speed: "+speed);
     Log.d("Data", "data from fragment "+s);
   }
+
+  public void exit(){
+    new AlertDialog.Builder(LivePreviewActivity.this)
+      .setIcon(android.R.drawable.ic_dialog_alert)
+      .setTitle("Quiting App?")
+      .setMessage("Are you sure to exit?")
+      .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+
+
+          //Stop the activity
+          finish();
+        }
+
+      })
+      .setNegativeButton(R.string.no, null)
+      .show();
+  }
+
 }
