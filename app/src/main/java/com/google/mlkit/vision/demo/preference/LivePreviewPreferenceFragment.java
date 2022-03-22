@@ -16,6 +16,8 @@
 
 package com.google.mlkit.vision.demo.preference;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -23,6 +25,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.StringRes;
 import com.google.mlkit.vision.demo.CameraSource;
@@ -39,18 +42,11 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+
     addPreferencesFromResource(R.xml.preference_live_preview_quickstart);
     setUpCameraPreferences();
     setUpFaceDetectionPreferences();
-
-    EditTextPreference editTextPreference = (EditTextPreference) findPreference("edit_text_preference_1");
-    editTextPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-      @Override
-      public boolean onPreferenceChange(Preference preference, Object o) {
-        editTextPreference.setSummary(o.toString());
-        return false;
-      }
-    });
+    otherSetUp();
   }
 
   void setUpCameraPreferences() {
@@ -166,5 +162,29 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
           listPreference.setSummary(listPreference.getEntries()[index]);
           return true;
         });
+  }
+
+  private void otherSetUp(){
+      EditTextPreference wtf = (EditTextPreference) findPreference(getString(R.string.edit_text_preference_1));
+      wtf.setSummary(wtf.getText());
+      wtf.setOnPreferenceChangeListener((preference, newValue) -> {
+          try {
+              float eyeWidth = Float.parseFloat((String) newValue);
+              if (eyeWidth<=0.99f && eyeWidth>=0.15f){
+                  wtf.setSummary((String) newValue);
+                  Log.d("Thu 1", "setUpFaceDetectionPreferences: "+newValue);
+                  return true;
+              }
+
+          } catch (NumberFormatException e) {
+              // Fall through intentionally.
+          }
+
+          Log.d("Thu 2", "setUpFaceDetectionPreferences: "+newValue);
+          Toast.makeText(
+                  getActivity(), "Độ mở của mắt phù hợp phải từ 0.15 đến 0.99", Toast.LENGTH_LONG)
+                  .show();
+          return false;
+      });
   }
 }

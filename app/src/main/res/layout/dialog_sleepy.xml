@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="250dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/alert"
+    android:background="@drawable/alert_sleepy"
     tools:context="ui.Fragment_Setting">
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_centerHorizontal="true"
 
         android:gravity="center_horizontal"
-        android:text="Phát hiện mất tập trung"
+        android:text="Phát hiện buồn ngủ"
         android:textColor="#ff000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,12 +53,12 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/bgbutton"
         android:gravity="center_vertical|center_horizontal"
-        android:layout_marginBottom="20dp"
         android:text="Bỏ qua"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tt_tips" />
+        app:layout_constraintTop_toBottomOf="@+id/tt_tips"
+        android:layout_marginBottom="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -41,5 +42,53 @@ public class ViewDialog extends Dialog {
             count++;
         }
 
+    }
+
+    AlertCalculate alertCalculate;
+
+
+    public void loseAttention(Dialog dialog){
+        alertCalculate = new AlertCalculate(getContext(), getOwnerActivity());
+        dialog.setContentView(R.layout.dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView text = dialog.findViewById(R.id.text_dialog);
+        text.setText("Bạn đang mất tập trung!!!");
+        TextView text_tips = dialog.findViewById(R.id.tt_tips);
+        text_tips.setText("Hãy cố gắng tập trung lái xe an toàn nhé");
+        alertCalculate.startVibrate();
+        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                alertCalculate.stopVibrate();
+            }
+        });
+        dialog.show();
+    }
+
+    public void sleepyAlert(Dialog dialog){
+        alertCalculate = new AlertCalculate(getContext(), getOwnerActivity());
+        dialog.setContentView(R.layout.dialog_sleepy);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView text = dialog.findViewById(R.id.text_dialog);
+        text.setText("Bạn đang buồn ngủ!!!");
+        TextView text_tips = dialog.findViewById(R.id.tt_tips);
+        text_tips.setText("Hãy dừng xe uống nước hoặc rửa mặt để cảm thấy tỉnh táo rồi tiếp tục lái xe nhé");
+        alertCalculate.startVibrate();
+        dialog.setCanceledOnTouchOutside(false);
+        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.rickroll);
+        mp.setLooping(true);
+        mp.start();
+        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                mp.stop();
+                alertCalculate.stopVibrate();
+            }
+        });
+        dialog.show();
     }
 }

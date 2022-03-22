@@ -14,8 +14,8 @@
     <string name="select_image">Select image</string>
 
     <!-- Settings related strings. -->
-    <string name="pref_screen_title_live_preview">Live preview settings</string>
-    <string name="pref_category_face_detection">Face Detection</string>
+    <string name="pref_screen_title_live_preview">Cài đặt</string>
+    <string name="pref_category_face_detection">Nhận diện</string>
 
     <!-- Strings for camera settings. -->
     <string name="pref_category_key_camera" translatable="false">pckc</string>
@@ -33,8 +33,8 @@
     <!-- Strings for face detector landmark mode preference. -->
     <string name="pref_title_face_detector_landmark_mode">Hiển thị điểm mốc</string>
     <string name="pref_key_live_preview_face_detection_landmark_mode" translatable="false">lpfdlm</string>
-    <string name="pref_entries_face_detector_landmark_mode_no_landmarks">Không điểm mốc</string>
-    <string name="pref_entries_face_detector_landmark_mode_all_landmarks">Tất cả điểm mốc</string>
+    <string name="pref_entries_face_detector_landmark_mode_no_landmarks">Không</string>
+    <string name="pref_entries_face_detector_landmark_mode_all_landmarks">Tất cả</string>
     <!-- The following entry values must match the ones in FaceDetectorOptions#LandmarkMode -->
     <string name="pref_entry_values_face_detector_landmark_mode_no_landmarks" translatable="false">1</string>
     <string name="pref_entry_values_face_detector_landmark_mode_all_landmarks" translatable="false">2</string>
@@ -74,10 +74,13 @@
     <string name="pref_title_face_detector_min_face_size">Kích thước khuôn mặt nhỏ nhất có thể phát hiện</string>
     <string name="pref_key_live_preview_face_detection_min_face_size" translatable="false">lpfdmfs</string>
     <string name="pref_dialog_message_face_detector_min_face_size">
-Tỷ lệ giữa chiều rộng phần đầu với chiều rộng hình ảnh và phạm vi có giá trị hợp lệ từ 0.0 đến 1.0]</string>
+Tỷ lệ giữa chiều rộng phần đầu với chiều rộng hình ảnh và phạm vi có giá trị hợp lệ từ 0.0 đến 1.0</string>
     <string name="pref_toast_invalid_min_face_size">Kích thước khuôn mặt tối thiểu phải trong phạm vi [0.0, 1.0]</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="edit_text_preference_1">test</string>
 
 
     <string name="title_shop">Trang chủ</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <PreferenceCategory
       android:enabled="true"
@@ -75,14 +76,16 @@
         android:title="@string/pref_title_face_detector_min_face_size"/>
   </PreferenceCategory>
 
-  <PreferenceCategory>
+  <PreferenceCategory
+      android:title="Cài đặt người dùng">
 
     <EditTextPreference
-        android:defaultValue="100"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
+        android:defaultValue="0.99"
+        android:key="@string/edit_text_preference_1"
+        android:dialogMessage="Độ mở của mắt có thể thay đổi tuỳ theo độ mở rộng mắt của từng người (Ví dụ: Mắt bình thường: 0.99 - Mắt híp: 0.86)"
+        android:persistent="true"
         android:singleLine="true"
-        android:title="Setting here" />
+        android:title="Cài đặt độ mở của mắt" />
   </PreferenceCategory>
 
 </PreferenceScreen>

@@ -60,6 +60,7 @@ import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSourcePreview;
 import com.google.mlkit.vision.demo.GraphicOverlay;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.ViewDialog;
 import com.google.mlkit.vision.demo.java.facedetector.FaceDetectorProcessor;
 import com.google.mlkit.vision.demo.map.MapsFragment;
 import com.google.mlkit.vision.demo.preference.PreferenceUtils;
@@ -131,6 +132,9 @@ public final class LivePreviewActivity extends AppCompatActivity
   int delay2=10000;
   private int blinkTime;
   private boolean isWake;
+  private TextView tv;
+  public float eyesWidth;
+  public ViewDialog viewDialog;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,10 @@ public final class LivePreviewActivity extends AppCompatActivity
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     setContentView(R.layout.activity_vision_live_preview);
+
+    viewDialog = new ViewDialog(this);
+
+    tv = findViewById(R.id.textView8);
 
     citiess = readCSVData();
 
@@ -212,20 +220,28 @@ public final class LivePreviewActivity extends AppCompatActivity
       public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (mySwitch.isChecked()){
           if(!dialog.isShowing()) {
-            dialog.setContentView(R.layout.dialog);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            TextView text = dialog.findViewById(R.id.text_dialog);
-            text.setText("ATTENTION!!!");
-            alertCalculate.startVibrate();
-            Button dialogButton = dialog.findViewById(R.id.btn_dialog);
-            dialogButton.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                dialog.dismiss();
-                alertCalculate.stopVibrate();
-              }
-            });
-            dialog.show();
+//            dialog.setContentView(R.layout.dialog);
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//            TextView text = dialog.findViewById(R.id.text_dialog);
+//            text.setText("ATTENTION!!!");
+//            alertCalculate.startVibrate();
+//            Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+//            dialogButton.setOnClickListener(new View.OnClickListener() {
+//              @Override
+//              public void onClick(View v) {
+//                dialog.dismiss();
+//                alertCalculate.stopVibrate();
+//              }
+//            });
+//            dialog.show();
+
+            if(isWake){
+              viewDialog.loseAttention(dialog);
+            }
+            else{
+              viewDialog.sleepyAlert(dialog);
+            }
+
           }
         }
       }
@@ -434,7 +450,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       //get time calculated when lose attention
       timeout = check.checkHead(processor.eulerX, processor.eulerY, processor.eulerZ);
 
-      mySwitch.setChecked(check.count > 400);
+      mySwitch.setChecked(check.count > 500);
     }
 
   }
@@ -482,18 +498,21 @@ public final class LivePreviewActivity extends AppCompatActivity
 
     if(value<0.96f){
       blinkCountMs++;
-//      Log.d("TAG4", "sleepDetection: "+blinkCountMs);
-
+      Log.d("TAG4", "sleepDetection: "+blinkCountMs);
     }
     else if(value>0.96f){
       blinkCountMs=0;
       isWake = true;
     }
     if (blinkCountMs>200){
-
-      Log.d("TAG4", "blink times: "+blinkTime);
       blinkCountMs=0;
       blinkTime++;
+      Log.d("TAG4", "blink times: "+blinkTime);
+    }
+    if (blinkTime>10){
+      isWake=false;
+      mySwitch.setChecked(true);
+      blinkTime=0;
     }
 
   }

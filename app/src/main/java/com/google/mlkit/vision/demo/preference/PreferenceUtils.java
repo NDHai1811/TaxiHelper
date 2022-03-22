@@ -19,6 +19,7 @@ package com.google.mlkit.vision.demo.preference;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -28,6 +29,7 @@ import com.google.common.base.Preconditions;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSource.SizePair;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
 /** Utility class to retrieve shared preferences. */
@@ -98,6 +100,14 @@ public class PreferenceUtils {
             sharedPreferences.getString(
                 context.getString(R.string.pref_key_live_preview_face_detection_min_face_size),
                 "0.1"));
+    float eyeWidth =
+            Float.parseFloat(
+                    sharedPreferences.getString(
+                            context.getString(R.string.edit_text_preference_1),
+                            "0.99"));
+    LivePreviewActivity livePreviewActivity = new LivePreviewActivity();
+    livePreviewActivity.eyesWidth = eyeWidth;
+    Log.d("Thu", "getFaceDetectorOptionsForLivePreview: "+eyeWidth);
 
     FaceDetectorOptions.Builder optionsBuilder =
         new FaceDetectorOptions.Builder()
