@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout-land/activity_vision_live_preview.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/activity_settings.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/activity_test_ui.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/activity_trafficsign.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/activity_vision_live_preview.xml" value="0.12" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/fragment_home.xml" value="0.3206672845227062" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/settings_activity.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/settings_style.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/StudioProjects/TaxiHelper/app/src/main/res/layout/speed_layout.xml" value="0.25" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/drawable-hdpi/ic_store_white_24dp.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/drawable-xxxhdpi/alertSleepy.xml" value="0.132" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/TaxiHelper/app/src/main/res/drawable/alert.xml" value="0.186" />

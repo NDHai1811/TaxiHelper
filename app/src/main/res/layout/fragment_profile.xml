@@ -235,16 +235,16 @@
 
         </LinearLayout>
 
-<!--        <Button-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/linear1"-->
-<!--            android:layout_marginTop="110dp"-->
-<!--            android:background="@color/white"-->
-<!--            android:foregroundGravity="center"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Đăng xuất"-->
-<!--            android:textColor="@color/red" />-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear1"
+            android:layout_marginTop="110dp"
+            android:background="@color/white"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="Đăng xuất"
+            android:textColor="@color/red" />
 
     </RelativeLayout>
 
