@@ -31,6 +31,8 @@ import androidx.annotation.StringRes;
 import com.google.mlkit.vision.demo.CameraSource;
 import com.google.mlkit.vision.demo.CameraSource.SizePair;
 import com.google.mlkit.vision.demo.R;
+import com.google.mlkit.vision.demo.java.LivePreviewActivity;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class LivePreviewPreferenceFragment extends PreferenceFragment {
     setUpCameraPreferences();
     setUpFaceDetectionPreferences();
     otherSetUp();
+    setUpListPreference(R.string.key_duration_update_info);
   }
 
   void setUpCameraPreferences() {

@@ -41,6 +41,7 @@ public class FaceDetectorProcessor extends VisionProcessorBase<List<Face>> {
   private final FaceDetector detector;
   public double headDirection;
   public float left, right, eulerX, eulerY, eulerZ;
+  public double headDirection;
   public boolean hasface = false;
 
   public FaceDetectorProcessor(Context context) {

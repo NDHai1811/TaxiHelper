@@ -78,14 +78,20 @@
 
   <PreferenceCategory
       android:title="Cài đặt người dùng">
-
     <EditTextPreference
         android:defaultValue="0.99"
         android:key="@string/edit_text_preference_1"
         android:dialogMessage="Độ mở của mắt có thể thay đổi tuỳ theo độ mở rộng mắt của từng người (Ví dụ: Mắt bình thường: 0.99 - Mắt híp: 0.86)"
         android:persistent="true"
-        android:singleLine="true"
         android:title="Cài đặt độ mở của mắt" />
+
+    <ListPreference
+        android:defaultValue="5000"
+        android:entries="@array/duration_name"
+        android:entryValues="@array/duration_value"
+        android:key="@string/key_duration_update_info"
+        android:persistent="true"
+        android:title="@string/duration_update_info"/>
   </PreferenceCategory>
 
 </PreferenceScreen>

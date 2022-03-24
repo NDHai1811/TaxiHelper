@@ -51,4 +51,22 @@
         <item>reply_all</item>
     </string-array>
 
+    <string-array name="duration_name">
+        <item>5 giây</item>
+        <item>10 giây</item>
+        <item>30 giây</item>
+        <item>1 phút</item>
+        <item>1 phút 30 giây</item>
+        <item>3 phút</item>
+    </string-array>
+
+    <string-array name="duration_value">
+        <item>5000</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>90000</item>
+        <item>180000</item>
+    </string-array>
+
 </resources>

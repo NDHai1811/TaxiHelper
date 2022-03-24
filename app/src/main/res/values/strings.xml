@@ -81,6 +81,8 @@ Tỷ lệ giữa chiều rộng phần đầu với chiều rộng hình ảnh v
 
 
     <string name="edit_text_preference_1">test</string>
+    <string name="duration_update_info">Cài đặt thời gian cập nhật vị trí</string>
+    <string name="key_duration_update_info">dui</string>
 
 
     <string name="title_shop">Trang chủ</string>

@@ -100,14 +100,7 @@ public class PreferenceUtils {
             sharedPreferences.getString(
                 context.getString(R.string.pref_key_live_preview_face_detection_min_face_size),
                 "0.1"));
-    float eyeWidth =
-            Float.parseFloat(
-                    sharedPreferences.getString(
-                            context.getString(R.string.edit_text_preference_1),
-                            "0.99"));
-    LivePreviewActivity livePreviewActivity = new LivePreviewActivity();
-    livePreviewActivity.eyesWidth = eyeWidth;
-    Log.d("Thu", "getFaceDetectorOptionsForLivePreview: "+eyeWidth);
+
 
     FaceDetectorOptions.Builder optionsBuilder =
         new FaceDetectorOptions.Builder()
@@ -141,4 +134,25 @@ public class PreferenceUtils {
   }
 
   private PreferenceUtils() {}
+
+  public static int getDuration(Context context){
+    int duration =
+            getModeTypePreferenceValue(
+                    context,
+                    R.string.key_duration_update_info,
+                    5000);
+    Log.d("Handler", "getDuration: "+duration);
+    return duration;
+  }
+
+  public static float getEyeRatio(Context context){
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    float eyeWidth =
+            Float.parseFloat(
+                    sharedPreferences.getString(
+                            context.getString(R.string.edit_text_preference_1),
+                            "0.99"));
+    Log.d("Thu", "getFaceDetectorOptionsForLivePreview: "+eyeWidth);
+    return eyeWidth;
+  }
 }

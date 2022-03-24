@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class ViewDialog extends Dialog {
     public ViewDialog(Context context) {
         super(context);
     }
+    Button dialogButton;
 
     public void showDialog(Activity activity, String msg){
         dialog = new Dialog(activity);
@@ -56,12 +58,14 @@ public class ViewDialog extends Dialog {
         TextView text_tips = dialog.findViewById(R.id.tt_tips);
         text_tips.setText("Hãy cố gắng tập trung lái xe an toàn nhé");
         alertCalculate.startVibrate();
-        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+        startTimer();
+        dialogButton = dialog.findViewById(R.id.btn_dialog);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
                 alertCalculate.stopVibrate();
+                cancelTimer();
             }
         });
         dialog.show();
@@ -90,5 +94,28 @@ public class ViewDialog extends Dialog {
             }
         });
         dialog.show();
+    }
+
+    //Declare timer
+    CountDownTimer cTimer = null;
+
+    //start timer function
+    void startTimer() {
+        cTimer = new CountDownTimer(11000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                dialogButton.setText("Bỏ qua("+millisUntilFinished/1000+"s)");
+            }
+            public void onFinish() {
+                dialogButton.performClick();
+            }
+        };
+        cTimer.start();
+    }
+
+
+    //cancel timer
+    void cancelTimer() {
+        if(cTimer!=null)
+            cTimer.cancel();
     }
 }

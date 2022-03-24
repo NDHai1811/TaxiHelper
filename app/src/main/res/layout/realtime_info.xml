@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
+                android:paddingRight="8dp"
                 android:text="Locate"
                 android:textColor="@color/white"
                 android:textSize="16sp"
